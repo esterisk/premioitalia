@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css?family=Libre+Franklin:400,400i,700,700i,900');
+@import url('https://use.fontawesome.com/releases/v5.0.13/css/all.css');
+@import url('https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css');
+@charset "UTF-8";
+ 
+body,p,h1,h2,h3,h4,h5,li { font-family: 'Libre Franklin', sans-serif; } 
+h1 { font-weight: 900; font-size: 30px; }
+h2 { font-weight: normal; font-size: 28px; }
+h3 { font-weight: normal; font-size: 24px; margin-top: 2em;}
+h4 { font-weight: bold; font-size: 14px; margin-top: 1em; margin-bottom: 0; text-transform: uppercase;}
+.albo h2, .albo h3 { margin-top: 20px; margin-bottom: 0; }
+.albo h2 a { color: black; }
+.convention { margin-bottom: 2em; font-style: italic; }
+.albo-anno { border-top: 1px solid black; margin-top: 30px; }
+.winner { margin: 2px 0 0 0; list-style: none; }
+.winner.finalista { font-size:80%; margin-left: 1em; }
+.winner.posizione { list-style: decimal; }
+.albo h4 { margin-bottom: 5px; }
+span.posizione { font-style: italic; font-size:80%; }
+
+p { margin-bottom: 0.5em; }
+.navbar { margin-bottom: 50px; }
+footer { margin-top: 3em; padding: 1em 0 3em 0; font-size: 90%; }
+.premio-logo { position: relative; }
+.premio-logo-trophy { position: absolute; left: -50px; }
+.logo-aligned { padding-left: 85px; }
+@media only screen and (max-width: 959px) {
+.logo-aligned { padding-left: 15px; }
+}
+@media only screen and (min-width: 1200px) {
+.premio-logo-trophy { position: absolute; left: -70px; }
+}
+@media only screen and (max-width: 1000px) {
+.premio-logo-trophy { display: none; }
+}
+
+.navbar { background: url(../images/space.jpg); background-size: cover; background-position: 50% 50%;}
+.navbar-dark .navbar-nav .nav-link { font-weight: bold; color: rgba(255,255,255,1); }
+.navbar-dark .navbar-nav .nav-link:hover { background-color: rgba(0,0,0,.6); color:white; }
+.dropdown-menu { background-color: #333; }
+
+.form-row { margin: .5em 0; }
+.row-categoria { margin: 2em 0; border: 1px solid #ccc; border-radius: 1em; padding: 2em; background: white; }
+.row-categoria:hover { border-color: #999; }
+.row-identita { margin-top: 0em; top: 2em; margin-bottom: 2em; }
+.row-identita.sticky-top { border-color: #f00; box-shadow: 2px 2px 6px #666; }
+
+.btn-save-floating { position: fixed; bottom: 40px; right: 40px; width: 5em; height: 5em; line-height: 5em; border-radius: 2.5em; padding: 0; box-shadow: 0px 3px 5px #999; z-index: 1000; }
+.save-alert { display: none; margin: 3em; margin-right: 10em; }
+.segnalazioni input[type=text] { color: #06f; }
+.identity-confirm { font-size: 150%; line-height: 1em; }
+
+.row-regolamento h2,.row-regolamento h3,.row-regolamento h4,.row-regolamento h5 { margin-bottom: 0.5em; }
+.row-regolamento h2 { font-weight: normal; font-size: 28px; margin-top: 2em; }
+.row-regolamento h3 { font-weight: normal; font-size: 24px; margin-top: 1.5em; }
+.row-regolamento h4 { font-weight: normal; font-size: 20px; margin-top: 1.5em; }
+.row-regolamento h5 { font-weight: normal; font-size: 18px; margin-top: 1em; }
+.row-download { margin: 2em 0; border: 1px solid #ccc; border-radius: 1em; padding: 0.5em 1em; font-size: 20px; line-height: 64px;}
+.row-download img { width: 64px; height: 64px; }
+
+.finalisti button { margin-bottom: 0.25em; text-align: left;}
+table.table th { font-size: 75%; font-weight: normal; color: #999; text-transform: uppercase; }
+table.table th.letter { width: 30px; line-height: 40px; }
+
+.finalisti h2 { margin-top: 2em; margin-bottom: 0; }
+.finalisti dt, .finalisti dd { display: inline; margin: 0; font-size: 75%; }
+.finalisti dt { margin-right: 0px; }
+.finalisti dd { margin-right: 6px; }
+
+.btn-group.partecipazione { margin-right: 15px; }
+#aggiungi-no { margin-top: 20px; margin-bottom: 20px; }
+.back { margin-top: 30px; }
+.back .fa { margin-right: 10px; }
+
+.candidature h2 { margin-top: 30px; margin-bottom: 15px; }
+.candidature h1 small { display: block; }
+.candidature-env p { margin: 0; }
+.insert-candidature { margin: 0 0 10px 0; padding: 0; }
+.insert-candidature a { display: block; color: #333; text-decoration: none; padding: 8px; } 
+.insert-candidature li { display: block; list-style: none; margin: 0; }
+.insert-candidature a:hover { color: #0056b3; background-color: #e8eeff; } 
+.insert-candidature li .fas { margin-right: 5px; }
+
+.finale .badge { color: white; }
+.finale .badge-f { margin-right: 10px; }
+.finale .text-center .badge-f { margin-right: 0; }
+.finale .badge.f1 { background-color: brown; }
+.finale .badge.f2 { background-color: teal; }
+.finale .badge.f3 { background-color: mediumpurple; }
+.finale .badge.f4 { background-color: DarkOrange; }
+.finale .badge.f5 { background-color: olive; }
+.finale .badge.f6 { background-color: orchid; }
+.finale .badge.f7 { background-color: darkblue; }
+.finale .badge.f8 { background-color: salmon; }
+.finale .badge.f9 { background-color: green; }
+.finale .badge.f10 { background-color: darkmagenta; }
+.finale .badge.f0 { background-color: lightgrey; color: grey; }
+.finale .elab div { width: 4em; margin: 5px 10px 5px 0; } 
+.finale .elab div .voti { font-weight: bold; font-size: 80%; color: grey; }
+.finale .conti-item { font-weight: bold; font-size: 80%; color: grey; white-space: nowrap; }
+.finale .badge-c { margin-right: 3px;  }
+.finale .badge.c1 { background-color: #333; }
+.finale .badge.c2 { background-color: #999; }
+.finale .badge.c3 { background-color: #ccc; }
