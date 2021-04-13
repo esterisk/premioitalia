@@ -49,6 +49,16 @@ class PagesController extends Controller
     {
         return view('come_candidarsi', [ 'page_title' => 'Come ci si candida al Premio Italia' ]);
     }
+     
+    public function grazie()
+    {
+        return view('donazione.grazie', [ 'page_title' => 'Grazie per la tua donazione!' ]);
+    }
+     
+    public function donazione()
+    {
+        return view('donazione.riprova', [ 'page_title' => 'Fai una donazione al Premio Italia' ]);
+    }
    
     public function italcon()
     {
