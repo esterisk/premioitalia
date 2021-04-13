@@ -91,6 +91,7 @@
 	<div class="row">
 		<div class="col-sm-12">
 			Il logo del Premio Italia è stato disegnato da Eta Musciàd. L'immagine del monolito è di Franco Brambilla.<br/>
+			Il sito web è stato creato da Silvio Sosio. Il codice è disponibile su <a href="https://github.com/esterisk/premioitalia">Github.com</a>.
 			A cura del <a href="{{ route('comitato') }}">Comitato Organizzatore del Premio Italia</a>
 			 - <a href="{{ route('privacy') }}">Trattamento dei dati personali</a>
 			 - <a href="{{ route('regolamento') }}">Regolamento del Premio Italia</a>
