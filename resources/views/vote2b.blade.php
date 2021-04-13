@@ -132,8 +132,10 @@
 				Ha inviato il tuo voto alle {{ Cutter::date($sent_at, '%H:%M del %e %B') }}.<br/>
 				Grazie! I risultati saranno pubblicati la sera del {{ Cutter::date($annata->premiazione, '%e %B') }}.
 			</div>
+			
 		</div>
 	</div>
+	@include('common.donazione')
 @endif
 
 

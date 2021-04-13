@@ -24,6 +24,7 @@ Invito al voto
 <p>https://www.premioitalia.org/entra/{{ urlencode($user->id) }}/{{ urlencode($user->token) }}</p>
 <p><br></p>
 <p>Ti raccomandiamo di usare un browser recente (Chrome, Safari, Firefox v. 4 o successive, Edge) per evitare problemi di compatibilità.</p>
+<p><b>ATTENZIONE:</b> questa email ti garantisce l'accesso al sito senza password, NON INOLTRARLA AD ALTRE PERSONE.</p>
 @if ($sollecito)
 <p><br></p>
 <p>Questo è la seconda mail di invito che ricevi, nel caso avessi dimenticato o non ricevuto la prima.</p>

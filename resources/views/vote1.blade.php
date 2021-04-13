@@ -134,8 +134,10 @@
 				Ha inviato il tuo voto alle {{ Cutter::date($sent_at, '%H:%M del %e %B') }}.<br/>
 				Grazie! La seconda fase delle votazioni si aprirà il {{ Cutter::date($annata->fase_2_da, '%e %B') }}.
 			</div>
+
 		</div>
 	</div>
+	@include('common.donazione')
 @endif
 
 

@@ -67,3 +67,5 @@ Route::get('/candidature', 'CandidaturaController@index')->name('candidature');
 Route::get('/candidature/{categoria}', 'CandidaturaController@categoria')->name('candidature-categoria');
 Route::post('/candidature/{categoria}', 'CandidaturaController@inserisci')->name('candidature-categoria-post');
 
+Route::get('/donazione/grazie', 'PagesController@grazie')->name('grazie');
+Route::get('/donazione', 'PagesController@donazione')->name('donazione');

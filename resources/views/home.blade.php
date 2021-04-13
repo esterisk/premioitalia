@@ -195,5 +195,6 @@
 		</div>
 
 	</div>	
+	@include('common.donazione')
 
 @endsection
