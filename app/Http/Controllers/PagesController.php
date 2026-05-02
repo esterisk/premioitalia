@@ -89,7 +89,7 @@ class PagesController extends Controller
 
     public function regolamento($versione = null)
     {
-        if (!in_array($versione, ['1.0', '1.1', '1.2', '1.3', '1.4', '1.5'])) $versione = '1.5';
+        if (!in_array($versione, ['1.0', '1.1', '1.2', '1.3', '1.4', '1.5', '1.6'])) $versione = '1.6';
         return view('regolamento', ['page_title' => 'Regolamento', 'versione' => str_replace('.', '-', $versione)]);
     }
 

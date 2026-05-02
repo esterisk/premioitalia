@@ -11,6 +11,7 @@ return [
 		'nome' => 'Nome Cognome',
 		'pubblicazione' => 'Pubblicazione (Testata o editore)',
 		'titolo' => 'Titolo',
+		'conduttori' => 'Conduttore o presentatore (Nome Cognome)',
 		'url' => 'Url (se disponibile)',
 	],
 

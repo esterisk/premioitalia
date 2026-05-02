@@ -1,4 +1,4 @@
-<h2>Versione 1.5, novembre 2024 - Non in vigore</h2>
+<h2>Versione 1.6, aprile 2025 - In vigore</h2>
 
 <p><a href="/regolamento/1.0">Versione 1.0</a> redatta da Silvio Sosio e approvata dall'Assemblea dell'Italcon a Chianciano il 28 maggio 2017.</p>
 <p><a href="/regolamento/1.1">Versione 1.1</a> consolidata con <a href="#modifiche">modifiche</a> approvate dall'Assemblea dell'Italcon a Chianciano il 28 maggio 2017.</p>
@@ -6,6 +6,7 @@
 <p><a href="/regolamento/1.3">Versione 1.3</a> consolidata con <a href="#modifiche">modifiche</a> approvate dall'Assemblea dell'Italcon a Torino il 5 maggio 2019.</p>
 <p><a href="/regolamento/1.4">Versione 1.4</a> consolidata con <a href="#modifiche">modifiche</a> approvate dall'Assemblea dell'Italcon a Fiuggi il 18 luglio 2021.</p>
 <p><a href="/regolamento/1.5">Versione 1.5</a> consolidata con <a href="#modifiche">modifiche</a> approvate dall'Assemblea dell'Italcon a Trieste il 2 novembre 2024.</p>
+<p><a href="/regolamento/1.6">Versione 1.6</a> consolidata con <a href="#modifiche">modifiche</a> approvate dall'Assemblea dell'Italcon a Genova il 10 aprile 2025.</p>
 <p>Basato sul regolamento originale del Premio Italia redatto da Ernesto Vegetti ed entrato in vigore il 3 maggio 1998.</p>
 
 <ul>
@@ -29,7 +30,7 @@
 		<li>Tutti gli iscritti ad altre convention affiliate (ved. <a href="#2.4.">2.4</a>)</li>
 		</ul></li>
 	<li><a id="2.3." class="ref">2.2.</a> L'inclusione nel Registro degli aventi diritto al voto non ha scadenza e non può essere revocata, se non nei casi previsti (ved. <a href="#2.7.">2.7</a> e <a href="#2.8.">2.8</a>) anche in caso di modifiche sui requisiti richiesti per l'inclusione nel Registro stesso.</li>
-	<li><a id="2.4." class="ref">2.4.</a> Affiliazione di altre convention: convention in attività da almeno tre anni e la cui partecipazione sia regolarmente registrata tramite iscrizione, i cui  organizzatori abbiano fatto domanda di affiliazione al premio Italia e detta domanda sia approvata dall'Assemblea dell'Italcon.</li>
+	<li><a id="2.4." class="ref">2.4.</a> Affiliazione di altre convention: convention in attività da almeno tre anni e la cui partecipazione sia regolarmente registrata tramite iscrizione, i cui organizzatori abbiano fatto domanda di affiliazione al premio Italia e detta domanda sia approvata dall'Assemblea dell'Italcon.</li>
 	<li><a id="2.5." class="ref">2.5.</a> Gli organizzatori delle convention devono assicurarsi che la domanda di iscrizione alla convention includa la clausola prevista dalla legge sulla privacy per autorizzare la trasmissione dei dati necessari (nome, cognome, email) all'ente gestore del premio. Solo i nominativi che hanno accettato della clausola potranno essere trasmessi.</li>
 	<li><a id="2.6." class="ref">2.6.</a> I nominativi dei votanti devono includere l'indirizzo di posta elettronica; l'indirizzo deve essere personale, non generico e può essere condiviso tra più votanti per un massimo di tre solo nel caso di familiari.</li>
 	<li><a id="2.7." class="ref">2.7.</a> Esclusione di un elettore. Un elettore può essere escluso dal Registro degli aventi diritto al voto nel caso in cui i criteri applicati per la sua inclusione, secondo le norme previste al momento dell'inclusione, si dimostrassero non validi. Un elettore può essere sospeso o escluso dal voto in seguito a uso sleale o illegale del suo diritto al voto, come: tentativi di manomettere il sistema di voto; votare a nome di altri elettori senza il relativo consenso; inserire nella scheda voto sistematicamente segnalazioni di candidati inesistenti; fornire generalità false. La sospensione vale per l’edizione in corso ed è a discrezione dell’ente gestore e dovrà essere segnalata alla successiva Assemblea dell’Italcon. L’esclusione potrà diventare definitiva solo su conferma votata dalla successiva Assemblea dell’Italcon.</li>
@@ -41,7 +42,7 @@
 	<li><a id="3.2." class="ref">3.2.</a> Il premio Italia può essere gestito dall’ente organizzatore dell’Italcon solo nel caso in cui l’ente al quale sia stata assegnata la gestione si ritiri o non sia stato possibile individuarne un altro. Sarà compito dell’Assemblea dell’Italcon nominare un altro ente gestore prima possibile.</li>
 	<li><a id="3.3." class="ref">3.3.</a> L’Ente gestore può essere una società o un’associazione, purché non direttamente coinvolta nell’organizzazione dell’Italcon, o un comitato liberamente costituito purché composto da almeno tre persone delle quali non più di una facente parte del comitato organizzatore dell’Italcon.</li>
 	<li><a id="3.4." class="ref">3.4.</a> L’Ente gestore del Premio deve fare del suo meglio per garantire la qualità del servizio di voto, la segretezza del voto (entro limiti tecnici ragionevoli), l’accesso al voto, la tempestiva risoluzione di problemi e l’assistenza agli elettori. </li>
-	<li><a id="3.5." class="ref">3.5.</a> L’Ente gestore del Premio non può in nessun caso comunicare l’andamento del premio durante le votazioni, o utilizzarne l’eventuale conoscenza per orientarne i risultati. </li>
+	<li><a id="3.5." class="ref">3.5.</a> L’Ente gestore del Premio non può in nessun caso comunicare l’andamento del premio durante le votazioni, o utilizzarne l’eventuale conoscenza per orientarne i risultati.</li>
 	</ul></li>
 <li><h2><a id="4." class="ref">4.</a> Modalità di voto</h2>
 	<ul>
@@ -137,6 +138,7 @@
 			<li><a id="5.3.2.1." class="ref">5.3.2.1.</a> <i>Collana.</i> <a href="#5.2.5.">pubblicazione professionale</a> di narrativa o saggistica (sono escluse le collane di albi a fumetti o graphic novel) che abbia pubblicato almeno 4 numeri entro la fine del <a href="#5.2.1.">periodo</a>, di cui almeno 2 nel <a href="#5.2.1.">periodo</a>, i cui volumi siano sistematicamente dedicati almeno al 90%, esclusi eventuali peritesti, a una singola opera (es. un romanzo, un saggio, un’antologia).</li>
 			<li><a id="5.3.2.2." class="ref">5.3.2.2.</a> <i>Rivista professionale</i>. <a href="#5.2.5.">pubblicazione professionale</a> di narrativa, saggistica o informazione che non sia qualificabile come collana e che abbia pubblicato almeno 4 numeri entro la fine del <a href="#5.2.1.">periodo</a>, di cui almeno 2 nel <a href="#5.2.1.">periodo</a>. Nel caso di pubblicazioni online non suddivise per numeri, che abbia pubblicato almeno 20 contribuzioni (<i>post</i>) di cui almeno 10 nel <a href="#5.2.1.">periodo</a>.</li>
 			<li><a id="5.3.2.3." class="ref">5.3.2.3.</a> <i>Rivista non professionale o sito amatoriale</i>. Pubblicazione non professionale che abbia pubblicato almeno 4 numeri entro la fine del <a href="#5.2.1.">periodo</a>, di cui almeno 1 nel <a href="#5.2.1.">periodo</a>. Nel caso di pubblicazioni online non suddivise per numeri, che abbia pubblicato almeno 20 contribuzioni (<i>post</i>) di cui almeno 5 nel <a href="#5.2.1.">periodo</a>.</li>
+			<li><a id="5.3.2.4." class="ref">5.3.2.4.</a> <i>Fancast</i>. Pubblicazione audio o video distribuita via internet e dedicata principalmente al fantastico che abbia pubblicato almeno 4 episodi nel <a href="#5.2.1.">periodo</a>.</li>
 		</ul></li>
 		<li><h4><a id="5.3.3." class="ref">5.3.3.</a> Personalità</h4>
 		<ul>
@@ -182,4 +184,8 @@
 <li>Abolizione della categoria <a href="/regolamento/1.4#5.3.1.9.">1.4#5.3.1.9.</a> Illustrazione o copertina</li>
 <li>Reintroduzione della categoria <a href="#5.3.3.3.">5.3.3.3.</a> Migliore artista.</li>
 <li>Chiariti i termini per l'italianità di un'opera nella categoria <a href="5.3.1.7.">5.3.1.7.</a> Antologia.
+</ol>
+<h3>Modifiche al regolamento 1.5 approvate a Genova il 10 aprile 2025</h3>
+<ol>
+<li>Introduzione della categoria <a href="#5.3.2.4.">5.3.2.4.</a> Fancast.</li>
 </ol>
