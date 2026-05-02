@@ -76,7 +76,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 
     Route::get('/voto', [VoteController::class, 'vote'])->name('vote');
     Route::get('/voto/conferma', [VoteController::class, 'confirm'])->name('vote-confirm');
-    Route::post('/voto', [VoteController::class, 'save'])->name('vote');
+    Route::post('/voto', [VoteController::class, 'save'])->name('vote.store');
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/api/convention/{convention_id}/{no?}', [ApiController::class, 'participate'])->name('participate');
 

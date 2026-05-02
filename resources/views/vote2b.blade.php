@@ -17,7 +17,7 @@
 	</div>
 </div>
 
-<form id="vote-form" action="{{ route('vote') }}" method="post">
+<form id="vote-form" action="{{ route('vote.store') }}" method="post">
 	{{ csrf_field() }}
 	<input type="hidden" name="anno" value="{{ $annata->anno }}">
 	<input type="hidden" name="fase" value="fase2">
