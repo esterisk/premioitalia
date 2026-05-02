@@ -28,7 +28,6 @@ use Illuminate\Support\Facades\View;
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 setlocale(LC_ALL, 'it_IT');
-View::share('annata', \App\Models\Annata::corrente());
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/login', [LoginController::class, 'login'])->name('login');
