@@ -12,9 +12,19 @@ class Candidatura extends Model
 	protected $table = 'candidature';
 	protected $primaryKey = 'id';
 
+	public function annata()
+	{
+		return $this->belongsTo(Annata::class, 'anno', 'anno');
+	}
+
 	public function categoria()
 	{
 		return $this->belongsTo(Categoria::class);
+	}
+
+	public function motivazione()
+	{
+		return $this->belongsTo(Motivazione::class, 'motivazione_id');
 	}
 
 	public function descrizione_ricca()
