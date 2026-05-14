@@ -6,6 +6,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
+use Filament\Forms\Components\KeyValue;
 
 class CandidaturaForm
 {
@@ -19,10 +20,9 @@ class CandidaturaForm
                     ->default(0),
                 TextInput::make('anno')
                     ->numeric(),
-                TextInput::make('descrizione')
-                    ->required(),
-                Textarea::make('campi')
+                KeyValue::make('campi')
                     ->required()
+                    ->addable(false)
                     ->columnSpanFull(),
                 Select::make('stato')
                     ->options(['nuovo' => 'Nuovo', 'valido' => 'Valido', 'escluso' => 'Escluso'])

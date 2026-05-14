@@ -12,6 +12,8 @@ class Candidatura extends Model
 	protected $table = 'candidature';
 	protected $primaryKey = 'id';
 
+	protected $guarded = ['id'];
+
 	public function annata()
 	{
 		return $this->belongsTo(Annata::class, 'anno', 'anno');
@@ -68,5 +70,22 @@ class Candidatura extends Model
 		} else {
 			return ['status' => 'error', 'error' => 'Candidatura già presente'];
 		}
+	}
+
+	public function setCampiAttribute($value)
+	{
+		$this->attributes['campi'] = json_encode($value);
+		$descrizione = substr(implode(' - ', array_values($value)), 0, 250);
+		$this->attributes['descrizione'] = $descrizione;
+	}
+
+	public function minuscole()
+	{
+		$campi = json_decode($this->campi, true);
+		foreach ($campi as $label => $value) {
+			$campi[$label] = Str::of($value)->lower()->ucwords();
+		}
+		$this->campi = $campi;
+		return $this;
 	}
 }

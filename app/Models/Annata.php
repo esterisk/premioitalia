@@ -9,6 +9,8 @@ class Annata extends Model
 	protected $table = 'annate';
 	protected $primaryKey = 'id';
 
+	protected $guarded = ['id'];
+
 	static public function corrente()
 	{
 		return Annata::orderBy('anno', 'desc')->first();

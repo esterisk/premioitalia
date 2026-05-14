@@ -70,7 +70,7 @@ class AnnatasTable
             ])
             ->recordActions([
                 EditAction::make(),
-                Action::make('corrente')
+/*                Action::make('corrente')
                     ->label('Corrente')
                     ->button()
                     ->action(function ($record) {
@@ -78,6 +78,7 @@ class AnnatasTable
                         $record->corrente = 1;
                         $record->save();
                     }),
+*/
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

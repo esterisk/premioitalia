@@ -67,7 +67,7 @@ class CandidaturasTable
             ->recordActions([
                 Action::make('escludi')
                     ->label('Escludi')
-                    ->icon('heroicon-o-x-circle')
+                    ->icon('heroicon-o-hand-thumb-down')
                     ->color('danger')
                     ->schema([
                         Select::make('motivazione_id')
@@ -84,13 +84,20 @@ class CandidaturasTable
                     ->visible(fn ($record) => $record->stato !== 'escluso'),
                 Action::make('accetta')
                     ->label('Accetta')
-                    ->icon('heroicon-o-check-circle')
+                    ->icon('heroicon-o-hand-thumb-up')
                     ->color('success')
                     ->action(function ($record) {
                         $record->stato = 'valido';
                         $record->save();
                     })
                     ->visible(fn ($record) => $record->stato !== 'valido'),
+                Action::make('minuscole')
+                    ->label('Minuscole')
+                    ->icon('heroicon-o-information-circle')
+                    ->color('secondary')
+                    ->action(function ($record) {
+                        $record->minuscole()->save();
+                    }),
                 EditAction::make(),
             ])
             ->toolbarActions([
