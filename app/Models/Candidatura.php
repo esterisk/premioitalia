@@ -74,6 +74,9 @@ class Candidatura extends Model
 
 	public function setCampiAttribute($value)
 	{
+		if (!is_array($value)) {
+			$value = json_decode($value, true);
+		}
 		$this->attributes['campi'] = json_encode($value);
 		$descrizione = substr(implode(' - ', array_values($value)), 0, 250);
 		$this->attributes['descrizione'] = $descrizione;
