@@ -13,6 +13,7 @@ use Illuminate\Support\HtmlString;
 use Filament\Forms\Components\Select;
 use App\Models\Candidatura;
 use App\Models\Motivazione;
+use Filament\Tables\Enums\RecordActionsPosition;
 
 class CandidaturasTable
 {
@@ -31,6 +32,8 @@ class CandidaturasTable
                         ' <a href="https://www.amazon.it/s?i=stripbooks&k=' . urlencode($record->descrizione) . '" target="_blank" style="text-decoration: underline;">Cerca su Amazon</a> - '.
                         ' <a href="https://www.ibs.it/algolia-search?ts=as&qs=true&query=' . urlencode($record->descrizione) . '" target="_blank" style="text-decoration: underline;">Cerca su IBS</a>')
                     )
+                    ->wrap()
+                    ->sortable()
                     ->searchable(),
                 TextColumn::make('stato')
                     ->badge()
@@ -65,10 +68,19 @@ class CandidaturasTable
                     ])
                 ])
             ->recordActions([
+                Action::make('minuscole')
+                    ->label('Aa')
+                    //->icon('heroicon-o-information-circle')
+                    ->action(function ($record) {
+                        $record->minuscole()->save();
+                    })
+                    ->color(fn ($record) => !$record->needLowering() ?  'gray' : 'primary')
+                    ->disabled(fn ($record) => !$record->needLowering()),
+                EditAction::make()->label(''),
                 Action::make('escludi')
-                    ->label('Escludi')
+                    ->label('')
                     ->icon('heroicon-o-hand-thumb-down')
-                    ->color('danger')
+                    ->color(fn ($record) => $record->stato == 'escluso' ?  'gray' : 'danger')
                     ->schema([
                         Select::make('motivazione_id')
                                 ->label('Motivazione')
@@ -81,25 +93,17 @@ class CandidaturasTable
                             $record->stato = 'escluso';
                             $record->save();
                     })
-                    ->visible(fn ($record) => $record->stato !== 'escluso'),
+                    ->disabled(fn ($record) => $record->stato == 'escluso'),
                 Action::make('accetta')
-                    ->label('Accetta')
+                    ->label('')
                     ->icon('heroicon-o-hand-thumb-up')
-                    ->color('success')
+                    ->color(fn ($record) => $record->stato == 'valido' ?  'gray' : 'success')
                     ->action(function ($record) {
                         $record->stato = 'valido';
                         $record->save();
                     })
-                    ->visible(fn ($record) => $record->stato !== 'valido'),
-                Action::make('minuscole')
-                    ->label('Minuscole')
-                    ->icon('heroicon-o-information-circle')
-                    ->color('secondary')
-                    ->action(function ($record) {
-                        $record->minuscole()->save();
-                    }),
-                EditAction::make(),
-            ])
+                    ->disabled(fn ($record) => $record->stato == 'valido'),
+            ], position: RecordActionsPosition::BeforeColumns)
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

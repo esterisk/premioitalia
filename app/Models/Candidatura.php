@@ -51,6 +51,17 @@ class Candidatura extends Model
 		return $query->whereStato('escluso')->where('motivo_esclusione', '<>', 'Già presente')->whereAnno(Annata::corrente()->anno);
 	}
 
+	public function needLowering()
+	{
+		$campi = json_decode($this->campi, true);
+		foreach ($campi as $label => $value) {
+			if (($label != 'url') && preg_match('/[A-Z][A-Z]+/', $value)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public static function salva($annata, $categoria, $request)
 	{
 		$campi = $request->except('_token');
