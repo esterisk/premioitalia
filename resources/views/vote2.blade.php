@@ -9,7 +9,7 @@
 
 <div class="row">
 	<div class="col-sm-12">
-		<p>È aperta la <b>seconda fase delle votazioni: la votazione finale</b> dei candidati finalisti. Il voto è aperto fino alla mezzanotte {{ _date($annata->fase_2_a, '%e %B') }}.</p>
+		<p>È aperta la <b>seconda fase delle votazioni: la votazione finale</b> dei candidati finalisti. Il voto è aperto fino alla mezzanotte {{ _date($annata->fase_2_a, 'j F') }}.</p>
 		<p>Per ogni categoria scegli il candidato che consideri più meritevole. Se pensi che nessuno dei finalisti sia meritevole e che il premio non debba essere assegnato, scegli «Non assegnare il premio per questa categoria». Se non conosci i candidati e preferisci non votare per una categoria,
 			scegli «Non voto per questa categoria».</p>
 	</div>
@@ -91,8 +91,8 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="alert alert-success">
-			Ha inviato il tuo voto alle {{ _date($sent_at, '%H:%M del %e %B') }}.<br />
-			Grazie! I risultati saranno pubblicati la sera del {{ _date($annata->premiazione, '%e %B') }}.
+			Ha inviato il tuo voto alle {{ _date($sent_at, '%H:%M del j F') }}.<br />
+			Grazie! I risultati saranno pubblicati la sera del {{ _date($annata->premiazione, 'j F') }}.
 		</div>
 	</div>
 </div>

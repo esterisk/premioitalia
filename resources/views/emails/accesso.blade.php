@@ -8,9 +8,9 @@ Accesso al voto al Premio Italia {{ $annata->anno }}
 <p>Caro {{ $user->name }},</p>
 <p>ricevi questa email in quanto hai richiesto di poter votare per il Premio Italia e ne hai facolt&agrave; in quanto elettore registrato.</p>
 @if($annata->fase() == 'fase1')
-<p>È aperta la <b>prima fase delle votazioni: la segnalazione</b> di candidati relativi al periodo di riferimento del {{ $annata->anno - 1 }}. Il voto è aperto fino alla mezzanotte {{ _date($annata->fase_1_a, '%e %B') }}.</p>
+<p>È aperta la <b>prima fase delle votazioni: la segnalazione</b> di candidati relativi al periodo di riferimento del {{ $annata->anno - 1 }}. Il voto è aperto fino alla mezzanotte {{ _date($annata->fase_1_a, 'j F') }}.</p>
 @elseif($annata->fase() == 'fase2')
-<p>È aperta la <b>seconda fase delle votazioni: la votazione finale</b> dei candidati finalisti. Il voto è aperto fino alla mezzanotte {{ _date($annata->fase_2_a, '%e %B') }}.</p>
+<p>È aperta la <b>seconda fase delle votazioni: la votazione finale</b> dei candidati finalisti. Il voto è aperto fino alla mezzanotte {{ _date($annata->fase_2_a, 'j F') }}.</p>
 @else
 <p>Al momento non sono aperte votazioni. Conserva se vuoi questa email per accedere al voto quando sarà aperto.</p>
 <p>Ti ricordiamo che la prima fase del voto sarà aperta dal {{ _date($annata->fase_1_da, 'd M') }} al {{ _date($annata->fase_1_a, 'd M') }}.</p>

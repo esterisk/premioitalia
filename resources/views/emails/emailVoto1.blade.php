@@ -23,5 +23,5 @@ Il tuo voto - Premio Italia {{ $voto->anno }} - Fase 1
 @endforeach
 </td></tr></tbody></table>
 <p><br></p>
-<p>Il voto è stato registrato alle {{ _date($voto->sent_at, '%H:%M del %e %B') }}.</p>
+<p>Il voto è stato registrato alle {{ _date($voto->sent_at, '%H:%M del j F') }}.</p>
 @endsection

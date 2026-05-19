@@ -9,7 +9,7 @@
 
 <div class="row">
 	<div class="col-sm-12">
-		<p>È aperta la <b>prima fase delle votazioni: la segnalazione</b> di candidati relativi al periodo di riferimento del {{ $annata->anno - 1 }}. Il voto è aperto fino alla mezzanotte {{ _date($annata->fase_1_a, '%e %B') }}.</p>
+		<p>È aperta la <b>prima fase delle votazioni: la segnalazione</b> di candidati relativi al periodo di riferimento del {{ $annata->anno - 1 }}. Il voto è aperto fino alla mezzanotte {{ _date($annata->fase_1_a, 'j F') }}.</p>
 	</div>
 </div>
 
@@ -138,8 +138,8 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="alert alert-success">
-			Ha inviato il tuo voto alle {{ _date($sent_at, '%H:%M del %e %B') }}.<br />
-			Grazie! La seconda fase delle votazioni si aprirà il {{ _date($annata->fase_2_da, '%e %B') }}.
+			Ha inviato il tuo voto alle {{ _date($sent_at, '%H:%M del j F') }}.<br />
+			Grazie! La seconda fase delle votazioni si aprirà il {{ _date($annata->fase_2_da, 'j F') }}.
 		</div>
 
 	</div>
