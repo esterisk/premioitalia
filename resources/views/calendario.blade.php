@@ -9,9 +9,9 @@
 @if ($annata->fase() == 'pre')
 <p>Le votazioni <b>non sono ancora aperte</b>.</p>
 @elseif  ($annata->fase() == 'spoglio1')
-<p>È terminata la prima fase: <b>è in corso lo spoglio dei voti</b>. La seconda fase aprirà il {{ _date($annata->fase_2_da, '%e %B') }}.</p>
+<p>È terminata la prima fase: <b>è in corso lo spoglio dei voti</b>. La seconda fase aprirà il {{ _date($annata->fase_2_da, 'j F') }}.</p>
 @elseif  ($annata->fase() == 'spoglio2')
-<p><b>È terminata la seconda fase</b>, grazie a tutti. I finalisti verranno resi noti il {{ _date($annata->finalisti, '%e %B') }}.</p>
+<p><b>È terminata la seconda fase</b>, grazie a tutti. I finalisti verranno resi noti il {{ _date($annata->finalisti, 'j F') }}.</p>
 @endif
 <p>Ecco le date delle varie fasi:</p>
 @include('common.tabella_fasi', [ 'annata' => $annata ])

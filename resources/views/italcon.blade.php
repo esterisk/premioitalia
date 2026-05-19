@@ -20,8 +20,8 @@
 			@endauth
 			{!! $c->italcon ? '<b>Italcon '.$c->italcon.'</b> ' : '' !!}{{ $c->titolo_edizione }} - 
 				{{ $c->city }} 
-				{{ $c->date_start != '0000-00-00' ? 'dal '._date($c->date_start, '%e %B %Y') : '' }} 
-				{{ $c->date_end != '0000-00-00' ? 'al '._date($c->date_end, '%e %B %Y') : '' }} 
+				{{ $c->date_start != '0000-00-00' ? 'dal '._date($c->date_start, 'j F Y') : '' }} 
+				{{ $c->date_end != '0000-00-00' ? 'al '._date($c->date_end, 'j F Y') : '' }} 
 				{!! ( $c->italcon > 0 || $c->serie->affiliata_da == 0 || $c->serie->affiliata_da > $c->anno ) ? '' : '<i>(affiliata)</i>' !!}</p>
 		@endforeach
 		</div>	

@@ -19,9 +19,9 @@
 		@if ($annata->fase() == 'pre')
 		<p>Le votazioni <b>non sono ancora aperte</b>.</p>
 		@elseif ($annata->fase() == 'spoglio1')
-		<p>È terminata la prima fase: <b>è in corso lo spoglio dei voti</b>. La seconda fase aprirà il {{ _date($annata->fase_2_da, '%e %B') }}.</p>
+		<p>È terminata la prima fase: <b>è in corso lo spoglio dei voti</b>. La seconda fase aprirà il {{ _date($annata->fase_2_da, 'j F') }}.</p>
 		@elseif ($annata->fase() == 'spoglio2')
-		<p><b>È terminata la seconda fase</b>, grazie a tutti. I vincitori verranno resi noti il {{ _date($annata->premiazione, '%e %B') }}.</p>
+		<p><b>È terminata la seconda fase</b>, grazie a tutti. I vincitori verranno resi noti il {{ _date($annata->premiazione, 'j F') }}.</p>
 		@endif
 		<p>Ecco le date delle varie fasi:</p>
 		@include('common.tabella_fasi', [ 'annata' => $annata ])
@@ -121,7 +121,7 @@
 		<div class="card" style="margin: 0.5em 0.5em 0.5em 0">
 			<div class="card-body">
 				<h5 class="card-title"><a href="{{ route('candidature') }}">Sono aperte le candidature spontanee</a></h5>
-				<p class="card-text">Se vuoi proporre un'opera o una candidatura per il Premio Italia puoi farlo fino al {{ _date($annata->candidature_a, '%e %B') }}. <a href="{{ route('candidature') }}">Vai »</a></p>
+				<p class="card-text">Se vuoi proporre un'opera o una candidatura per il Premio Italia puoi farlo fino al {{ _date($annata->candidature_a, 'j F') }}. <a href="{{ route('candidature') }}">Vai »</a></p>
 			</div>
 		</div>
 	</div>
@@ -194,7 +194,7 @@
 							{{ $italcon->titolo_edizione }}
 							@endif
 						</h5>
-						<p>L'Italcon e la cerimonia del Premio Italia {{ $italcon->anno }} saranno a {{ $italcon->city }} dal {{ _date($italcon->date_start, '%e %B') }} al {{ _date($italcon->date_end, '%e %B') }}</p>
+						<p>L'Italcon e la cerimonia del Premio Italia {{ $italcon->anno }} saranno a {{ $italcon->city }} dal {{ _date($italcon->date_start, 'j F') }} al {{ _date($italcon->date_end, 'j F') }}</p>
 						@if ($italcon->organizzazione)
 						<p class="card-text">Organizzazione: {{ $italcon->organizzazione }}</p>
 						@endif
