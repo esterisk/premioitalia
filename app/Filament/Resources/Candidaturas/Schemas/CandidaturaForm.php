@@ -7,6 +7,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
 use Filament\Forms\Components\KeyValue;
+use Illuminate\Database\Eloquent\Builder;
 
 class CandidaturaForm
 {
@@ -14,15 +15,18 @@ class CandidaturaForm
     {
         return $schema
             ->components([
-                TextInput::make('categoria_id')
+                Select::make('categoria_id')
                     ->required()
-                    ->numeric()
-                    ->default(0),
+                    ->relationship(
+                        name: 'categoria',
+                        titleAttribute: 'nome',
+                        modifyQueryUsing: fn (Builder $query): Builder => $query->active(),
+                    ),
                 TextInput::make('anno')
                     ->numeric(),
                 KeyValue::make('campi')
                     ->required()
-                    ->addable(false)
+                    ->addActionLabel('aggiungi campo')
                     ->columnSpanFull(),
                 Select::make('stato')
                     ->options(['nuovo' => 'Nuovo', 'valido' => 'Valido', 'escluso' => 'Escluso'])

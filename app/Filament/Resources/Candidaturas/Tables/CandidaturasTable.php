@@ -59,7 +59,7 @@ class CandidaturasTable
                     ->options(\App\Models\Annata::pluck('anno', 'anno'))
                     ->default(date('Y')),
                 SelectFilter::make('categoria_id')
-                    ->options(\App\Models\Categoria::pluck('nome', 'id')),
+                    ->options(\App\Models\Categoria::active()->pluck('nome', 'id')),
                 SelectFilter::make('stato')
                     ->options([
                         'nuovo' => 'Nuovo',
