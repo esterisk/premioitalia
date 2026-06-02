@@ -73,7 +73,7 @@ RUN composer install --no-dev --no-autoloader --optimize-autoloader
 COPY . .
 
 # Cron Laravel
-RUN echo "* * * * * su-exec www-data php /var/www/artisan schedule:run >> /dev/null 2>&1" | crontab -# Asset compilati
+RUN echo "* * * * * su-exec www-data php /var/www/artisan schedule:run >> /dev/null 2>&1" | crontab -    
 #COPY --from=assets /app/public/build ./public/build
 
 # Finalizza Composer
