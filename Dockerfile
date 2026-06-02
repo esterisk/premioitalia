@@ -12,8 +12,6 @@ COPY vite.config.* ./
 COPY resources/ ./resources/
 COPY public/ ./public/
 
-RUN npm run build
-
 # =========================================
 # Stage 2: immagine di produzione
 # =========================================
@@ -69,6 +67,8 @@ RUN composer install --no-dev --no-autoloader --optimize-autoloader
 
 # Copia il codice
 COPY . .
+
+RUN npm run build
 
 # Asset compilati
 COPY --from=assets /app/public/build ./public/build
