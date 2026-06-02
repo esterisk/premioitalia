@@ -71,7 +71,7 @@ COPY . .
 RUN npm run build
 
 # Asset compilati
-COPY --from=assets /app/public/build ./public/build
+#COPY --from=assets /app/public/build ./public/build
 
 # Finalizza Composer
 RUN composer dump-autoload --optimize --no-scripts
