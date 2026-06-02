@@ -22,13 +22,13 @@ function slideToggle(el) {
 }
 
 function fadeIn(el) {
-    el.style.display = '';
+    el.style.display = 'block';
     el.style.opacity = '1';
 }
 
 function fadeOut(el) {
     el.style.display = 'none';
-    el.style.opacity = '';
+    el.style.opacity = '0';
 }
 
 // ============================================================
@@ -307,7 +307,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 fetch(url, {
                     method: 'POST',
                     body: new URLSearchParams(new FormData(form)),
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
                 })
                     .then(r => r.json())
                     .then(function (result) {
@@ -438,7 +441,10 @@ document.addEventListener('DOMContentLoaded', function () {
             fetch(this.getAttribute('action'), {
                 method: 'POST',
                 body: new URLSearchParams(formData),
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
             })
                 .then(r => r.json())
                 .then(function (result) {

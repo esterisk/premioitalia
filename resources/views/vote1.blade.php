@@ -138,7 +138,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="alert alert-success">
-			Ha inviato il tuo voto alle {{ _date($sent_at, '%H:%M del j F') }}.<br />
+			Ha inviato il tuo voto alle {{ _date($sent_at, 'H:i') }} del {{ _date($sent_at, 'j F') }}.<br />
 			Grazie! La seconda fase delle votazioni si aprirà il {{ _date($annata->fase_2_da, 'j F') }}.
 		</div>
 

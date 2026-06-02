@@ -148,4 +148,15 @@ class Annata extends Model
 		$this->mailing_status = 'idle';
 		$this->save();
 	}
+
+	public function mailingTag(bool $solicitation = false)
+	{
+		$fase = $this->fase();
+		if (!in_array($fase, ['fase1', 'fase2'])) return null;
+		$dataInizioFase = $fase == 'fase1' ? $this->fase_1_da : $this->fase_2_da;
+		$giorniDaInizioFase = (time() - strtotime($dataInizioFase)) / 86400;
+		$lancio = $solicitation ? 'S' : ($giorniDaInizioFase > 7 ? 'R' : 'F');
+		return $this->anno . '-' . $fase . '-' . $lancio;
+	}
+
 }

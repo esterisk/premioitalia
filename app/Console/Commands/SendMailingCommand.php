@@ -30,13 +30,11 @@ class SendMailingCommand extends Command
     public function handle()
     {
         $annata = Annata::corrente();
-        echo 'Anno ' . $annata->anno . ' ' . $annata->mailing_status . "\n";
+        ray('Anno ' . $annata->anno . ' ' . $annata->mailing_status . "\n");
         switch ($annata->mailing_status) {
             case 'access-waiting':
-                User::accessMailingStart();
-                break;
             case 'access-sending':
-                $annata->accessMailingCheck();
+                User::accessMailingStart();
                 break;
             case 'access-checking':
                 $annata->accessMailingProblem();
