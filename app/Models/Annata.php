@@ -6,157 +6,168 @@ use Illuminate\Database\Eloquent\Model;
 
 class Annata extends Model
 {
-	protected $table = 'annate';
-	protected $primaryKey = 'id';
+    protected $table = 'annate';
 
-	protected $guarded = ['id'];
+    protected $primaryKey = 'id';
 
-	static public function corrente()
-	{
-		return Annata::orderBy('anno', 'desc')->first();
-	}
+    protected $guarded = ['id'];
 
-	static public function annoCorrente()
-	{
-		static $anno = false;
-		if (!$anno) $anno = self::corrente()->anno;
-		return $anno;
-	}
+    public static function corrente()
+    {
+        return Annata::orderBy('anno', 'desc')->first();
+    }
 
-	public function fase()
-	{
-		$now = date('Y-m-d');
-		if ($now < $this->candidature_da) {
-			return 'pre';
-		} elseif ($now >= $this->candidature_da && $now <= $this->candidature_a . ' 23:59:59') {
-			return 'fase0';
-		} elseif ($now >= $this->fase_1_da && $now <= $this->fase_1_a . ' 23:59:59') {
-			return 'fase1';
-		} elseif ($now > $this->fase_1_a . ' 23:59:59' && $now < $this->fase_2_da) {
-			return 'spoglio1';
-		} elseif ($now >= $this->fase_2_da && $now <= $this->fase_2_a . ' 23:59:59') {
-			return 'fase2';
-		} elseif ($now > $this->fase_2_a . ' 23:59:59' && $now < $this->premiazione) {
-			return 'spoglio2';
-		} elseif ($now > $this->premiazione) {
-			return 'post';
-		}
-		return 'pre';
-	}
+    public static function annoCorrente()
+    {
+        static $anno = false;
+        if (! $anno) {
+            $anno = self::corrente()->anno;
+        }
 
-	public function candidatureAperte()
-	{
-		$now = date('Y-m-d');
-		$user = auth()->user();
-		return (
-			($now >= $this->candidature_da && $now <= $this->candidature_a . ' 23:59:59')
-			|| ($user && $user->admin == 1)
-		);
-	}
+        return $anno;
+    }
 
-	public function voti()
-	{
-		return $this->hasMany(Voto::class, 'anno', 'anno');
-	}
+    public function fase()
+    {
+        $now = date('Y-m-d');
+        if ($now < $this->candidature_da) {
+            return 'pre';
+        } elseif ($now >= $this->candidature_da && $now <= $this->candidature_a.' 23:59:59') {
+            return 'fase0';
+        } elseif ($now >= $this->fase_1_da && $now <= $this->fase_1_a.' 23:59:59') {
+            return 'fase1';
+        } elseif ($now > $this->fase_1_a.' 23:59:59' && $now < $this->fase_2_da) {
+            return 'spoglio1';
+        } elseif ($now >= $this->fase_2_da && $now <= $this->fase_2_a.' 23:59:59') {
+            return 'fase2';
+        } elseif ($now > $this->fase_2_a.' 23:59:59' && $now < $this->premiazione) {
+            return 'spoglio2';
+        } elseif ($now > $this->premiazione) {
+            return 'post';
+        }
 
-	public function segnalazioni()
-	{
-		return $this->hasMany(Segnalazione::class, 'segnalazione_anno', 'anno');
-	}
+        return 'pre';
+    }
 
-	public function preferenze()
-	{
-		return $this->hasMany(Preferenza::class, 'preferenza_anno', 'anno');
-	}
+    public function candidatureAperte()
+    {
+        $now = date('Y-m-d');
+        $user = auth()->user();
 
-	public function finalisti()
-	{
-		return $this->finalisti_pubblici > 0;
-	}
+        return
+            ($now >= $this->candidature_da && $now <= $this->candidature_a.' 23:59:59')
+            || ($user && $user->admin == 1);
+    }
 
-	public function risultati()
-	{
-		return $this->risultati_pubblici > 0 || (request()->user()->admin ?? 0) == 1;
-	}
+    public function voti()
+    {
+        return $this->hasMany(Voto::class, 'anno', 'anno');
+    }
 
-	public function pubblica()
-	{
-		$this->risultati_pubblici = 1;
-		$this->save();
-		return ['status' => 'success'];
-	}
+    public function segnalazioni()
+    {
+        return $this->hasMany(Segnalazione::class, 'segnalazione_anno', 'anno');
+    }
 
-	public function getConventionAttribute()
-	{
-		return Convention::whereAnno($this->anno)->where('italcon', '>', 0)->first();
-	}
+    public function preferenze()
+    {
+        return $this->hasMany(Preferenza::class, 'preferenza_anno', 'anno');
+    }
 
+    public function finalisti()
+    {
+        return $this->finalisti_pubblici > 0;
+    }
 
-	public function getStatus()
-	{
-		$invitation     = $this->anno . ' ' . $this->fase();
-		$reminder       = $this->anno . ' ' . $this->fase() . ' R';
-		$solicitation   = $this->anno . ' ' . $this->fase() . ' S';
+    public function risultati()
+    {
+        return $this->risultati_pubblici > 0 || (request()->user()->admin ?? 0) == 1;
+    }
 
-		$invitations = User::isValid()->where('last_invitation', $invitation)->count();
-		$reminders = User::isValid()->where('last_invitation', $reminder)->count();
-		$solicitations = User::isValid()->where('last_invitation', $solicitation)->count();
+    public function pubblica()
+    {
+        $this->risultati_pubblici = 1;
+        $this->save();
 
-		$status = [
-			'year' => $this->anno,
-			'phase' => $this->fase(),
-			'voters' => User::isValid()->count(),
-			'votes' => Voto::annata($this)->fase($this->fase())->inviato()->count(),
-			'votes1' => Voto::annata($this)->fase1()->inviato()->count(),
-			'votes2' => Voto::annata($this)->fase2()->inviato()->count(),
-			'drafts' => Voto::annata($this)->fase($this->fase())->preparazione()->count(),
-			'mailing_status' => $this->mailing_status ?: 'idle',
-			'invitations' => $invitations + $reminders + $solicitations,
-			'reminders' => $reminders,
-			'solicitations' => $solicitations,
-		];
-		return $status;
-	}
+        return ['status' => 'success'];
+    }
 
-	public function accessMailingStart()
-	{
-		$this->mailing_status = 'access-waiting';
-		$this->save();
-	}
+    public function getConventionAttribute()
+    {
+        return Convention::whereAnno($this->anno)->where('italcon', '>', 0)->first();
+    }
 
-	public function accessMailingCheck()
-	{
-		$this->mailing_status = 'access-checking';
-		$this->save();
-	}
+    public function getStatus()
+    {
+        $invitation = $this->mailingTag('F');
+        $reminder = $this->mailingTag('R');
+        $solicitation = $this->mailingTag('S');
 
-	public function mailingProblem()
-	{
-		$this->mailing_status = 'problem';
-		// eventualmente manda mail
-		$this->save();
-	}
+        $invitations = User::isValid()->where('last_invitation', $invitation)->count();
+        $reminders = User::isValid()->where('last_invitation', $reminder)->count();
+        $solicitations = User::isValid()->where('last_invitation', $solicitation)->count();
 
-	public function accessMailingSending()
-	{
-		$this->mailing_status = 'access-sending';
-		$this->save();
-	}
+        $status = [
+            'year' => $this->anno,
+            'phase' => $this->fase(),
+            'voters' => User::isValid()->count(),
+            'votes' => Voto::annata($this)->fase($this->fase())->inviato()->count(),
+            'votes1' => Voto::annata($this)->fase1()->inviato()->count(),
+            'votes2' => Voto::annata($this)->fase2()->inviato()->count(),
+            'drafts' => Voto::annata($this)->fase($this->fase())->preparazione()->count(),
+            'mailing_status' => $this->mailing_status ?: 'idle',
+            'invitations' => $invitations + $reminders + $solicitations,
+            'reminders' => $reminders,
+            'solicitations' => $solicitations,
+        ];
 
-	public function mailingStop()
-	{
-		$this->mailing_status = 'idle';
-		$this->save();
-	}
+        return $status;
+    }
 
-	public function mailingTag(bool $solicitation = false)
-	{
-		$fase = $this->fase();
-		if (!in_array($fase, ['fase1', 'fase2'])) return null;
-		$dataInizioFase = $fase == 'fase1' ? $this->fase_1_da : $this->fase_2_da;
-		$giorniDaInizioFase = (time() - strtotime($dataInizioFase)) / 86400;
-		$lancio = $solicitation ? 'S' : ($giorniDaInizioFase > 7 ? 'R' : 'F');
-		return $this->anno . '-' . $fase . '-' . $lancio;
-	}
+    public function accessMailingStart()
+    {
+        $this->mailing_status = 'access-waiting';
+        $this->save();
+    }
 
+    public function accessMailingCheck()
+    {
+        $this->mailing_status = 'access-checking';
+        $this->save();
+    }
+
+    public function mailingProblem()
+    {
+        $this->mailing_status = 'problem';
+        // eventualmente manda mail
+        $this->save();
+    }
+
+    public function accessMailingSending()
+    {
+        $this->mailing_status = 'access-sending';
+        $this->save();
+    }
+
+    public function mailingStop()
+    {
+        $this->mailing_status = 'idle';
+        $this->save();
+    }
+
+    public function mailingTag($wave = null)
+    {
+        $fase = $this->fase();
+        if (! in_array($fase, ['fase1', 'fase2'])) {
+            return null;
+        }
+
+        if (! $wave) {
+            $dataInizioFase = $fase == 'fase1' ? $this->fase_1_da : $this->fase_2_da;
+            $giorniDaInizioFase = (time() - strtotime($dataInizioFase)) / 86400;
+            $wave = $giorniDaInizioFase > 7 ? 'R' : 'F';
+        }
+
+        return $this->anno.'-'.$fase.'-'.$wave;
+    }
 }

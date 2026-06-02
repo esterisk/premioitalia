@@ -21,5 +21,7 @@ php artisan migrate --force
 chown -R www-data:www-data storage bootstrap/cache
 chmod -R 775 storage bootstrap/cache
 
+/usr/sbin/crond -b -l 8   # <-- avvia dcron in background
+
 /usr/local/sbin/php-fpm -D
 exec /usr/sbin/nginx -g "daemon off;"

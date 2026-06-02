@@ -11,12 +11,12 @@ class StatusWidget extends Widget
 
     protected int|string|array $columnSpan = 'full';
 
-    public array $status = [];
-
-    public function mount(): void
+    protected function getViewData(): array
     {
         $annata = Annata::corrente();
 
-        $this->status = $annata ? $annata->getStatus() : [];
+        return [
+            'status' => $annata ? $annata->getStatus() : [],
+        ];
     }
 }

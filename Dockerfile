@@ -22,6 +22,8 @@ FROM php:8.3-fpm-alpine AS production
 # Dipendenze di sistema
 RUN apk add --no-cache \
     nginx \
+    dcron \
+    su-exec \
     curl \
     libpng-dev \
     libzip-dev \
@@ -70,7 +72,8 @@ RUN composer install --no-dev --no-autoloader --optimize-autoloader
 # Copia il codice
 COPY . .
 
-# Asset compilati
+# Cron Laravel
+RUN echo "* * * * * su-exec www-data php /var/www/artisan schedule:run >> /dev/null 2>&1" | crontab -# Asset compilati
 #COPY --from=assets /app/public/build ./public/build
 
 # Finalizza Composer
