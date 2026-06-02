@@ -1,32 +1,5 @@
 # =========================================
-# Stage 1: dipendenze PHP con Composer
-# =========================================
-FROM php:8.3-fpm-alpine AS composer_deps
-
-RUN apk add --no-cache \
-    libpng-dev \
-    libzip-dev \
-    oniguruma-dev \
-    icu-dev \
-    freetype-dev \
-    libjpeg-turbo-dev \
-    imagemagick-dev \
-    imagemagick \
-    $PHPIZE_DEPS \
-    pkgconfig \
-    libc-dev
-
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
-WORKDIR /app
-
-COPY composer.json composer.lock ./
-RUN composer install --no-dev --no-autoloader --optimize-autoloader --no-scripts
-
-COPY . .
-
-# =========================================
-# Stage 2: compilazione asset con Node/Vite
+# Stage 1: compilazione asset con Node/Vite
 # =========================================
 FROM node:20-alpine AS assets
 
@@ -38,18 +11,15 @@ RUN npm ci
 COPY vite.config.* ./
 COPY resources/ ./resources/
 COPY public/ ./public/
-COPY . .
 
-# necessario perché theme.css importa da vendor/filament/...
-COPY --from=composer_deps /app/vendor ./vendor
-
-RUN npm run build
+#RUN npm run build
 
 # =========================================
-# Stage 3: immagine di produzione
+# Stage 2: immagine di produzione
 # =========================================
 FROM php:8.3-fpm-alpine AS production
 
+# Dipendenze di sistema
 RUN apk add --no-cache \
     nginx \
     curl \
@@ -65,6 +35,7 @@ RUN apk add --no-cache \
     pkgconfig \
     libc-dev
 
+# Estensioni PHP
 RUN docker-php-ext-configure gd \
         --with-freetype \
         --with-jpeg \
@@ -78,25 +49,33 @@ RUN docker-php-ext-configure gd \
         mbstring \
         gd
 
+# Imagick
 RUN pecl install imagick \
     && docker-php-ext-enable imagick
 
+# Redis
 RUN pecl install redis \
     && docker-php-ext-enable redis
 
+# Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
 
+# Dipendenze PHP
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --no-autoloader --optimize-autoloader --no-scripts
+#RUN composer install --no-dev --no-scripts --no-autoloader --optimize-autoloader
+RUN composer install --no-dev --no-autoloader --optimize-autoloader
 
+# Copia il codice
 COPY . .
 
-COPY --from=assets /app/public/build ./public/build
+# Asset compilati
+#COPY --from=assets /app/public/build ./public/build
 
+# Finalizza Composer
 RUN composer dump-autoload --optimize --no-scripts
-
+    
 COPY docker/nginx.conf /etc/nginx/nginx.conf
 COPY docker/php.ini /usr/local/etc/php/conf.d/custom.ini
 COPY docker/entrypoint.sh /entrypoint.sh
