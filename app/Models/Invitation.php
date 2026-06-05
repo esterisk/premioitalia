@@ -35,14 +35,14 @@ class Invitation extends Model
             } else {
                 if ($user = self::checkExistingEmail($invitation->email)) {
                     //$user->sendRegistrationExistingConfirmation($invitation->firstname . ' ' . $invitation->lastname);
-                    $results[$line] = 'existing email';
+                    $results[$line] = 'Errore: Email '.$invitation->email.' gia registrata';
                 } elseif ($user = self::checkExistingName($invitation->firstname, $invitation->lastname)) {
-                    $results[$line] = 'existing name';
+                    $results[$line] = 'Errore: Nome '.$invitation->firstname.' '.$invitation->lastname.' gia registrato';
                 } else {
                     $invitation->convention_id = $convention_id;
                     $invitation->save();
                     $invitation->send();
-                    $results[$invitation->firstname . ' ' . $invitation->lastname . ' <' . $invitation->email . '>'] = 'success';
+                    $results[$invitation->firstname . ' ' . $invitation->lastname . ' <' . $invitation->email . '>'] = 'Invito spedito';
                 }
             }
         }

@@ -1,23 +1,20 @@
 <?php
 
-namespace App\Filament\Resources\Candidaturas\Tables;
+namespace App\Filament\Resources\Candidatos\Tables;
 
 use App\Models\Annata;
-use App\Models\Candidatura;
 use App\Models\Categoria;
-use App\Models\Motivazione;
-use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Enums\RecordActionsPosition;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\HtmlString;
 
-class CandidaturasTable
+class CandidatosTable
 {
     public static function configure(Table $table): Table
     {
@@ -29,6 +26,14 @@ class CandidaturasTable
                 TextColumn::make('anno')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('finalista')
+                    ->numeric()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('posizione')
+                    ->numeric()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('descrizione')
                     ->description(fn ($record) => new HtmlString('<a href="https://www.google.com/search?q='.urlencode($record->descrizione).'" target="_blank" style="text-decoration: underline;">Cerca su Google</a> - '.
                         ' <a href="https://www.amazon.it/s?i=stripbooks&k='.urlencode($record->descrizione).'" target="_blank" style="text-decoration: underline;">Cerca su Amazon</a> - '.
@@ -37,6 +42,10 @@ class CandidaturasTable
                     ->wrap()
                     ->sortable()
                     ->searchable(),
+                TextColumn::make('simili')
+                    ->listWithLineBreaks()
+                    ->html()
+                    ->limitList(3),
                 TextColumn::make('stato')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
@@ -44,8 +53,18 @@ class CandidaturasTable
                         'valido' => 'success',
                         'escluso' => 'danger',
                     }),
+                TextColumn::make('spostatoIn.descrizione')
+                    ->sortable()
+                    ->visible(fn ($livewire): bool => ! ($livewire->tableFilters['nascondi_spostati']['isActive'] ?? false)),
                 TextColumn::make('motivo_esclusione')
                     ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('verificato')
+                    ->numeric()
+                    ->sortable(),
+                TextColumn::make('ordine')
+                    ->numeric()
+                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->dateTime()
@@ -60,7 +79,7 @@ class CandidaturasTable
                 SelectFilter::make('anno')
                     ->options(Annata::pluck('anno', 'anno'))
                     ->default(date('Y')),
-                SelectFilter::make('categoria_id')
+                SelectFilter::make('categoria')
                     ->options(Categoria::active()->pluck('nome', 'id')),
                 SelectFilter::make('stato')
                     ->options([
@@ -68,49 +87,22 @@ class CandidaturasTable
                         'valido' => 'Valido',
                         'escluso' => 'Escluso',
                     ]),
-            ])
+                SelectFilter::make('nascondi_spostati')
+                    ->label('Mostra')
+                    ->query(fn (Builder $query): Builder => $query->where('spostato_in', 0))
+                    ->default(true)
+                    ->options([
+                        false => 'Spostati',
+                        true => 'Validi',
+                    ]),
+            ], layout: FiltersLayout::AboveContent)
             ->recordActions([
-                Action::make('minuscole')
-                    ->label('Aa')
-                    // ->icon('heroicon-o-information-circle')
-                    ->action(function ($record) {
-                        $record->minuscole()->save();
-                    })
-                    ->color(fn ($record) => ! $record->needLowering() ? 'gray' : 'primary')
-                    ->disabled(fn ($record) => ! $record->needLowering()),
-                EditAction::make()->label(''),
-                Action::make('escludi')
-                    ->label('')
-                    ->icon('heroicon-o-hand-thumb-down')
-                    ->color(fn ($record) => $record->stato == 'escluso' ? 'gray' : 'danger')
-                    ->schema([
-                        Select::make('motivazione_id')
-                            ->label('Motivazione')
-                            ->options(Motivazione::pluck('motivazione', 'id'))
-                            ->required(),
-                    ])
-                    ->action(function (array $data, Candidatura $record): void {
-                        $record->motivazione()->associate($data['motivazione_id']);
-                        $record->motivo_esclusione = Motivazione::find($data['motivazione_id'])->motivazione;
-                        $record->stato = 'escluso';
-                        $record->save();
-                    })
-                    ->disabled(fn ($record) => $record->stato == 'escluso'),
-                Action::make('accetta')
-                    ->label('')
-                    ->icon('heroicon-o-hand-thumb-up')
-                    ->color(fn ($record) => $record->stato == 'valido' ? 'gray' : 'success')
-                    ->action(function ($record) {
-                        $record->stato = 'valido';
-                        $record->save();
-                    })
-                    ->disabled(fn ($record) => $record->stato == 'valido'),
-            ], position: RecordActionsPosition::BeforeColumns)
+                EditAction::make(),
+            ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
-            ])
-            ->defaultSort('created_at', 'desc');
+            ]);
     }
 }

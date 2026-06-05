@@ -17,8 +17,10 @@ use Filament\Tables\Table;
 class CandidaturaResource extends Resource
 {
     protected static ?string $model = Candidatura::class;
+
     protected static ?string $pluralModelLabel = 'Candidature';
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::ArchiveBoxArrowDown;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::InboxArrowDown;
 
     protected static ?string $recordTitleAttribute = 'descrizione';
 
