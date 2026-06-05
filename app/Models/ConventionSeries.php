@@ -8,6 +8,7 @@ class ConventionSeries extends Model
 {
 	protected $table = 'convention_series';
 	protected $primaryKey = 'id';
+	protected $guarded = ['id'];
 
 	public function convention()
 	{

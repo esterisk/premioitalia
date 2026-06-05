@@ -8,6 +8,7 @@ class Convention extends Model
 {
 	protected $table = 'convention';
 	protected $primaryKey = 'id';
+	protected $guarded = ['id'];
 
 	public function albo()
 	{
