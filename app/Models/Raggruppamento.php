@@ -8,6 +8,7 @@ class Raggruppamento extends Model
 {
 	protected $table = 'raggruppamenti';
 	protected $primaryKey = 'id';
+	protected $guarded = ['id'];
 
 	public function categorie()
 	{

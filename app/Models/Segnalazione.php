@@ -11,6 +11,7 @@ class Segnalazione extends Model
 {
 	protected $table = 'segnalazioni';
 	protected $primaryKey = 'id';
+	protected $guarded = ['id'];
 
 	public function elettore()
 	{

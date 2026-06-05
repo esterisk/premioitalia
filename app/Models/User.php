@@ -31,11 +31,7 @@ class User extends Authenticatable implements FilamentUser // implements MustVer
      *
      * @var list<string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+	protected $guarded = ['id'];
 
     public function canAccessPanel(Panel $panel): bool
     {

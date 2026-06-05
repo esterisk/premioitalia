@@ -12,6 +12,7 @@ class Voto extends Model
 {
 	protected $table = 'voto';
 	protected $primaryKey = 'id';
+	protected $guarded = ['id'];
 
 	static public function corrente()
 	{

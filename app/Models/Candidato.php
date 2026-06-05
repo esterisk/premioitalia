@@ -10,6 +10,8 @@ class Candidato extends Model
 
     protected $primaryKey = 'id';
 
+	protected $guarded = ['id'];
+
     public function categoria()
     {
         return $this->belongsTo(Categoria::class);

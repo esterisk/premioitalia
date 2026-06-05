@@ -8,6 +8,7 @@ class Conteggio extends Model
 {
 	protected $table = 'conteggi';
 	protected $primaryKey = 'id';
+	protected $guarded = ['id'];
 
 	public $conti_candidati;
 	public $indicatori;

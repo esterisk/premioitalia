@@ -8,6 +8,7 @@ class Categoria extends Model
 {
 	protected $table = 'categorie';
 	protected $primaryKey = 'id';
+	protected $guarded = ['id'];
 
 	public function scopeActive($query)
 	{

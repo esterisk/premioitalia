@@ -11,6 +11,7 @@ class Preferenza extends Model
 {
 	protected $table = 'preferenze';
 	protected $primaryKey = 'id';
+	protected $guarded = ['id'];
 
 	public function elettore()
 	{
