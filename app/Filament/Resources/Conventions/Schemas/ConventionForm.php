@@ -6,6 +6,7 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
+use Filament\Forms\Components\Select;
 
 class ConventionForm
 {
@@ -13,18 +14,19 @@ class ConventionForm
     {
         return $schema
             ->components([
-                TextInput::make('serie_id')
-                    ->required()
-                    ->numeric(),
+                Select::make('serie_id')
+                    ->relationship('serie', 'nome')
+                    ->required(),
                 TextInput::make('anno')
                     ->required()
                     ->numeric(),
                 TextInput::make('titolo_edizione')
                     ->required(),
+                    /*
                 TextInput::make('codice')
                     ->required(),
+                */
                 TextInput::make('italcon')
-                    ->required()
                     ->numeric(),
                 TextInput::make('city')
                     ->required(),
@@ -38,10 +40,12 @@ class ConventionForm
                 Textarea::make('ospiti')
                     ->columnSpanFull(),
                 TextInput::make('toastmaster'),
+                /*
                 TextInput::make('votanti')
                     ->numeric(),
                 TextInput::make('aventi_diritto')
                     ->numeric(),
+                */
                 TextInput::make('url')
                     ->url(),
                 TextInput::make('logo'),
