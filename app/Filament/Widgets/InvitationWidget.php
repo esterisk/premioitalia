@@ -45,6 +45,22 @@ class InvitationWidget extends Widget implements HasActions, HasSchemas
                 $success = 0;
                 $color = '';
 
+                if (!$this->conventionId) {
+                    $message = 'Errore: Selezionare una convention';
+                    Notification::make()
+                        ->title($message)
+                        ->send();
+                    return;
+                }
+
+                if (!$this->testo) {
+                    $message = 'Errore: Inserire un testo';
+                    Notification::make()
+                        ->title($message)
+                        ->send();
+                    return;
+                }
+
                 foreach ($result as $line => $outcome) {
                     if (strpos($outcome, 'Errore') === 0) {
                         $errors++;

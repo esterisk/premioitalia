@@ -7,6 +7,7 @@ use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Filament\Forms\Components\Toggle;
 
 class UserForm
 {
@@ -25,10 +26,8 @@ class UserForm
                     ->email()
                     ->required(),
                 TextInput::make('signature'),
-                TextInput::make('email_verified')
-                    ->email()
-                    ->required()
-                    ->numeric(),
+                Toggle::make('email_verified')
+                    ->required(),
                 TextInput::make('password')
                     ->password()
                     ->required(),

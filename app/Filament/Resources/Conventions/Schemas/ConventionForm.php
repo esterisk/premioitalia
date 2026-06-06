@@ -26,14 +26,14 @@ class ConventionForm
                 TextInput::make('codice')
                     ->required(),
                 */
-                TextInput::make('italcon')
-                    ->numeric(),
                 TextInput::make('city')
                     ->required(),
                 DatePicker::make('date_start')
                     ->required(),
                 DatePicker::make('date_end')
                     ->required(),
+                TextInput::make('italcon')
+                    ->numeric(),
                 DatePicker::make('premiazione'),
                 Textarea::make('organizzazione')
                     ->columnSpanFull(),
