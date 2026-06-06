@@ -36,8 +36,9 @@ class Invitation extends Model
                 if ($user = self::checkExistingEmail($invitation->email)) {
                     //$user->sendRegistrationExistingConfirmation($invitation->firstname . ' ' . $invitation->lastname);
                     $results[$line] = 'Errore: Email '.$invitation->email.' gia registrata';
+                    $user->sendAccess(false);
                 } elseif ($user = self::checkExistingName($invitation->firstname, $invitation->lastname)) {
-                    $results[$line] = 'Errore: Nome '.$invitation->firstname.' '.$invitation->lastname.' gia registrato';
+                    $results[$line] = 'Errore: Nome '.$invitation->firstname.' '.$invitation->lastname.' gia registrato con email '.$user->email;
                 } else {
                     $invitation->convention_id = $convention_id;
                     $invitation->save();
