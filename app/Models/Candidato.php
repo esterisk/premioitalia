@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\StatoCandidatoEnum;
 use Illuminate\Database\Eloquent\Model;
 
 class Candidato extends Model
@@ -10,7 +11,7 @@ class Candidato extends Model
 
     protected $primaryKey = 'id';
 
-	protected $guarded = ['id'];
+    protected $guarded = ['id'];
 
     public function categoria()
     {
@@ -25,6 +26,11 @@ class Candidato extends Model
     public function spostatoIn()
     {
         return $this->belongsTo(self::class, 'spostato_in');
+    }
+
+    public function getVotiAttribute()
+    {
+        return $this->segnalazioni()->count();
     }
 
     public function sigla($disambigua = 0)
@@ -74,12 +80,17 @@ class Candidato extends Model
         return $query->where('finalista', '>', 0);
     }
 
+    public function scopeValido($query)
+    {
+        return $query->where('stato', StatoCandidatoEnum::Valido->value);
+    }
+
     public function simili()
     {
         return self::where('categoria_id', $this->categoria_id)
             ->where('anno', $this->anno)
             ->where('id', '!=', $this->id)
-            ->where('spostato_in', 0)
+            ->where('stato', StatoCandidatoEnum::Valido->value)
             ->orderByRaw('MATCH(descrizione) AGAINST(? IN NATURAL LANGUAGE MODE) DESC', [$this->descrizione])
             ->selectRaw('descrizione, MATCH(descrizione) AGAINST(? IN NATURAL LANGUAGE MODE) AS similarity', [$this->descrizione])
             ->limit(5)
@@ -103,5 +114,42 @@ class Candidato extends Model
         }
 
         return $simili;
+    }
+
+    public function spostaIn($candidato_id, $motivo = '')
+    {
+        $this->spostato_in = $candidato_id;
+        $this->stato = StatoCandidatoEnum::Spostato->value;
+        $this->save();
+
+        Segnalazione::where('candidato_id', $this->id)->update(['candidato_id' => $candidato_id]);
+        Segnalazione::verificaMassimi($this->categoria_id);
+    }
+
+    public function cambiaCategoria($categoria_id)
+    {
+        $this->categoria_id = $categoria_id;
+        $this->save();
+
+        Segnalazione::where('candidato_id', $this->id)->update(['segnalazione_categoria_id' => $categoria_id]);
+        Segnalazione::verificaMassimi($categoria_id);
+    }
+
+    public static function updateSegnalazioni($categoria_id = null)
+    {
+        if ($categoria_id) {
+            $categorie = [$categoria_id];
+        } else {
+            $categorie = Categoria::active()->pluck('id');
+        }
+
+        $subquery = Segnalazione::selectRaw('COUNT(*)')
+            ->whereColumn('candidato_id', 'candidati.id')
+            ->corrente()
+            ->valide()
+            ->toBase();
+
+        self::whereIn('categoria_id', $categorie)
+            ->update(['segnalazioni' => $subquery]);
     }
 }

@@ -10,6 +10,13 @@ class ListCandidaturas extends ListRecords
 {
     protected static string $resource = CandidaturaResource::class;
 
+    public function mount(): void
+    {
+        parent::mount();
+
+        Candidato::updateSegnalazioni(null);
+    }
+
     protected function getHeaderActions(): array
     {
         return [

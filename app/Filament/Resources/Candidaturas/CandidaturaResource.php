@@ -18,7 +18,7 @@ class CandidaturaResource extends Resource
 {
     protected static ?string $model = Candidatura::class;
 
-    protected static ?string $pluralModelLabel = 'Candidature';
+    protected static ?string $pluralModelLabel = 'Candidature spontanee';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::InboxArrowDown;
 

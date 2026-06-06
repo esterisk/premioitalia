@@ -16,6 +16,7 @@ use Illuminate\Support\HtmlString;
 
 class CandidatosTable
 {
+
     public static function configure(Table $table): Table
     {
         return $table
@@ -53,6 +54,10 @@ class CandidatosTable
                         'valido' => 'success',
                         'escluso' => 'danger',
                     }),
+                TextColumn::make('segnalazioni')
+                    ->label('Voti')
+                    ->sortable()
+                    ->numeric(),
                 TextColumn::make('spostatoIn.descrizione')
                     ->sortable()
                     ->visible(fn ($livewire): bool => ! ($livewire->tableFilters['nascondi_spostati']['isActive'] ?? false)),
@@ -79,7 +84,8 @@ class CandidatosTable
                 SelectFilter::make('anno')
                     ->options(Annata::pluck('anno', 'anno'))
                     ->default(date('Y')),
-                SelectFilter::make('categoria')
+                SelectFilter::make('categoria_id')
+                    ->label('Categoria')
                     ->options(Categoria::active()->pluck('nome', 'id')),
                 SelectFilter::make('stato')
                     ->options([
