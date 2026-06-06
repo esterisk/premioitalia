@@ -43,19 +43,26 @@ class InvitationWidget extends Widget implements HasActions, HasSchemas
                 $message = '';
                 $errors = 0;
                 $success = 0;
+                $color = '';
 
                 foreach ($result as $line => $outcome) {
                     if (strpos($outcome, 'Errore') === 0) {
                         $errors++;
+                        $color = 'red';
                     } else {
                         $success++;
+                        $color = 'green';
                     }
-                    $message .= "<b>$line: $outcome</b><br>";
+                    $message .= "<b style=\"color:$color;\">$line:</b> $outcome<br>";
+
                 }
 
                 Notification::make()
                     ->title($message)
                     ->send();
+
+                $this->testo = '';
+                $this->conventionId = null;
             });
     }
 }
