@@ -28,9 +28,6 @@ class UserForm
                 TextInput::make('signature'),
                 Toggle::make('email_verified')
                     ->required(),
-                TextInput::make('password')
-                    ->password()
-                    ->required(),
                 TextInput::make('username'),
                 TextInput::make('token'),
                 DatePicker::make('token_expire'),
@@ -44,15 +41,11 @@ class UserForm
                 TextInput::make('ultimo_voto')
                     ->numeric()
                     ->default(0),
-                TextInput::make('admin')
-                    ->required()
-                    ->numeric()
+                Toggle::make('admin')
                     ->default(0),
                 TextInput::make('last_invitation'),
                 DateTimePicker::make('invitation_sent'),
                 TextInput::make('email_errors')
-                    ->email()
-                    ->required()
                     ->numeric()
                     ->default(0),
                 TextInput::make('last_email_error')
