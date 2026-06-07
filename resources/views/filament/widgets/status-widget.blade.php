@@ -12,7 +12,8 @@
 
                 <div class="rounded-lg bg-gray-50 dark:bg-white/5 px-4 py-3">
                     <p class="text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">Fase</p>
-                    <p class="mt-1 text-2xl font-bold text-gray-900 dark:text-white">{{ $status['phase'] }}</p>
+                    <p class="mt-1 text-2xl font-bold text-gray-900 dark:text-white">{{ str_replace('fase','fase ',$status['phase']) }}</p>
+                    <p class="mt-1 text-sm text-gray-900 dark:text-white">{{ $status['faseRimasti'] }}/{{ $status['faseGiorniTotali']}} giorni rimanenti</p>
                 </div>
 
                 <div class="rounded-lg bg-gray-50 dark:bg-white/5 px-4 py-3">
