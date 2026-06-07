@@ -13,6 +13,11 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\HtmlString;
+use Filament\Actions\Action;
+use Filament\Forms\Components\Select;
+use App\Models\Candidato;
+use Filament\Tables\Enums\RecordActionsPosition;
+use App\Models\Motivazione;
 
 class CandidatosTable
 {
@@ -40,17 +45,19 @@ class CandidatosTable
                         ' <a href="https://www.amazon.it/s?i=stripbooks&k='.urlencode($record->descrizione).'" target="_blank" style="text-decoration: underline;">Cerca su Amazon</a> - '.
                         ' <a href="https://www.ibs.it/algolia-search?ts=as&qs=true&query='.urlencode($record->descrizione).'" target="_blank" style="text-decoration: underline;">Cerca su IBS</a>')
                     )
-                    ->wrap()
+                    //->wrap()
+                    ->width('30%')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('simili')
                     ->listWithLineBreaks()
+                    ->width('20%')
                     ->html()
                     ->limitList(3),
                 TextColumn::make('stato')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
-                        'nuovo' => 'warning',
+                        'spostato' => 'warning',
                         'valido' => 'success',
                         'escluso' => 'danger',
                     }),
@@ -66,7 +73,8 @@ class CandidatosTable
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('verificato')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('ordine')
                     ->numeric()
                     ->sortable()
@@ -89,22 +97,60 @@ class CandidatosTable
                     ->options(Categoria::active()->pluck('nome', 'id')),
                 SelectFilter::make('stato')
                     ->options([
-                        'nuovo' => 'Nuovo',
                         'valido' => 'Valido',
+                        'spostato' => 'Spostato',
                         'escluso' => 'Escluso',
-                    ]),
-                SelectFilter::make('nascondi_spostati')
-                    ->label('Mostra')
-                    ->query(fn (Builder $query): Builder => $query->where('spostato_in', 0))
-                    ->default(true)
-                    ->options([
-                        false => 'Spostati',
-                        true => 'Validi',
-                    ]),
+                    ])->default('valido'),
             ], layout: FiltersLayout::AboveContent)
             ->recordActions([
-                EditAction::make(),
-            ])
+                Action::make('minuscole')
+                    ->label('Aa')
+                    // ->icon('heroicon-o-information-circle')
+                    ->action(function ($record) {
+                        $record->minuscole()->save();
+                    })
+                    ->color(fn ($record) => ! $record->needLowering() ? 'gray' : 'primary')
+                    ->disabled(fn ($record) => ! $record->needLowering()),
+                Action::make('escludi')
+                    ->label('')
+                    ->icon('heroicon-s-hand-thumb-down')
+                    ->color(fn ($record) => $record->stato == 'escluso' ? 'danger' : 'primary')
+                    ->schema([
+                        Select::make('motivazione_id')
+                            ->label('Motivazione')
+                            ->options(Motivazione::pluck('motivazione', 'id'))
+                            ->required(),
+                    ])
+                    ->action(function (array $data, Candidato $record): void {
+                        $record->escludi($data['motivazione_id']);
+                    })
+                    ->disabled(fn ($record) => $record->stato == 'escluso'),
+                Action::make('conferma')
+                    ->label('')
+                    ->icon('heroicon-s-hand-thumb-up')
+                    ->color(fn ($record) => $record->verificato == 0 ? 'primary' : 'success')
+                    ->action(function ($record) {
+                        if ($record->stato != 'valido') {
+                            $record->riammetti();
+                        }
+                        $record->verificato = 1 - $record->verificato;
+                        $record->save();
+                    }),
+                Action::make('sposta')
+                    ->label('')->tooltip('Unisci ad altro candidato')
+                    ->icon('heroicon-o-arrow-right-end-on-rectangle')
+                    ->color('warning')
+                    ->action(function (Candidato $record, array $data) {
+                        $record->spostaIn($data['spostato_in']);
+                    })
+                    ->form([
+                        Select::make('spostato_in')
+                            ->label('Candidato di destinazione')
+                            ->options(fn (Candidato $record) => $record->similiOptions(20))
+                            ->required(),
+                    ]),
+                EditAction::make()->tooltip('Modifica record')->label(''),
+            ], position: RecordActionsPosition::BeforeColumns)
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
