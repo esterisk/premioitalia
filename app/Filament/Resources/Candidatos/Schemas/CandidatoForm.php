@@ -6,6 +6,8 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Filament\Forms\Components\KeyValue;
+use Filament\Forms\Components\Toggle;
 
 class CandidatoForm
 {
@@ -13,46 +15,39 @@ class CandidatoForm
     {
         return $schema
             ->components([
-                TextInput::make('spostato_in')
-                    ->required()
-                    ->numeric()
-                    ->default(0),
                 TextInput::make('categoria_id')
-                    ->required()
+                    ->disabled()
                     ->numeric()
                     ->default(0),
                 TextInput::make('anno')
+                    ->disabled()
                     ->numeric(),
-                TextInput::make('finalista')
+                KeyValue::make('campi')
                     ->required()
-                    ->numeric()
-                    ->default(0),
-                TextInput::make('posizione')
-                    ->required()
-                    ->numeric()
-                    ->default(0),
-                TextInput::make('descrizione')
-                    ->required(),
-                Textarea::make('campi')
-                    ->required()
+                    ->addActionLabel('aggiungi campo')
                     ->columnSpanFull(),
                 Select::make('stato')
+                    ->disabled()
                     ->options(['valido' => 'Valido', 'escluso' => 'Escluso', 'spostato' => 'Spostato'])
                     ->default('valido'),
                 TextInput::make('motivo_esclusione'),
-                TextInput::make('verificato')
+                Toggle::make('verificato')
+                    ->required()
+                    ->default(false),
+                TextInput::make('identificativo')
+                    ->disabled(),
+                /*
+                TextInput::make('ordine')
                     ->required()
                     ->numeric()
                     ->default(0),
-                TextInput::make('identificativo')
-                    ->required(),
-                TextInput::make('ordine')
-                    ->required()
+                TextInput::make('spostato_in')
                     ->numeric()
                     ->default(0),
                 TextInput::make('immagine'),
                 TextInput::make('link_testo'),
                 TextInput::make('link_immagine'),
+                */
             ]);
     }
 }

@@ -58,6 +58,16 @@ class Candidato extends Model
         return $sigla;
     }
 
+	public function setCampiAttribute($value)
+	{
+		if (!is_array($value)) {
+			$value = json_decode($value, true);
+		}
+		$this->attributes['campi'] = json_encode($value);
+		$descrizione = substr(implode(' - ', array_values($value)), 0, 250);
+		$this->attributes['descrizione'] = $descrizione;
+	}
+
     public function descrizione_ricca()
     {
         $campi = json_decode($this->campi, true);
