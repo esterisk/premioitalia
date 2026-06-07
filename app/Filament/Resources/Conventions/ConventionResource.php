@@ -19,7 +19,7 @@ class ConventionResource extends Resource
     protected static ?string $model = Convention::class;
     protected static ?string $pluralModelLabel = 'Convention';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTicket;
 
     protected static ?string $recordTitleAttribute = 'titolo_edizione';
 

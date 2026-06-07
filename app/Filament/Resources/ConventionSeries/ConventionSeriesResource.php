@@ -19,7 +19,7 @@ class ConventionSeriesResource extends Resource
     protected static ?string $model = ConventionSeries::class;
     protected static ?string $pluralModelLabel = 'Serie Convention';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedMapPin;
 
     protected static ?string $recordTitleAttribute = 'nome';
 

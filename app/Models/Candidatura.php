@@ -51,6 +51,11 @@ class Candidatura extends Model
 		return $query->whereStato('escluso')->where('motivo_esclusione', '<>', 'Già presente')->whereAnno(Annata::corrente()->anno);
 	}
 
+	public function scopeNuove($query)
+	{
+		return $query->whereStato('nuovo')->whereAnno(Annata::corrente()->anno);
+	}
+
 	public function needLowering()
 	{
 		$campi = json_decode($this->campi, true);

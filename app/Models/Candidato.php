@@ -80,9 +80,19 @@ class Candidato extends Model
         return $query->where('finalista', '>', 0);
     }
 
+    public function scopeCorrente($query)
+    {
+        return $query->whereAnno(Annata::corrente()->anno);
+    }
+
     public function scopeValido($query)
     {
-        return $query->where('stato', StatoCandidatoEnum::Valido->value);
+        return $query->corrente()->where('stato', StatoCandidatoEnum::Valido->value);
+    }
+
+    public function scopeNuovo($query)
+    {
+        return $query->valido()->where('verificato', 0);
     }
 
 	public function motivazione()

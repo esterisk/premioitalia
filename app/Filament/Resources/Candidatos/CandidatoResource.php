@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class CandidatoResource extends Resource
 {
@@ -23,6 +24,8 @@ class CandidatoResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::ArchiveBoxArrowDown;
 
     protected static ?string $recordTitleAttribute = 'descrizione';
+
+    protected static string | UnitEnum | null $navigationGroup = 'FASE UNO';
 
     public static function form(Schema $schema): Schema
     {
@@ -49,4 +52,15 @@ class CandidatoResource extends Resource
             'edit' => EditCandidato::route('/{record}/edit'),
         ];
     }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::nuovo()->count();
+    }
+
+    public static function getNavigationBadgeTooltip(): ?string
+    {
+        return 'Nuovi candidati da esaminare';
+    }
+
 }
