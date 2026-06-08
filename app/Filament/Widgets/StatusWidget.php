@@ -8,6 +8,7 @@ use Filament\Widgets\Widget;
 class StatusWidget extends Widget
 {
     protected string $view = 'filament.widgets.status-widget';
+    protected static ?int $sort = 1;
 
     protected int|string|array $columnSpan = 'full';
 
