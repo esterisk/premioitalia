@@ -242,4 +242,29 @@ class Candidato extends Model
         }
         $this->save();
     }
+
+    public function verificationLinks()
+    {
+        $links = [];
+        $data = json_decode($this->campi, true);
+        $desc = null;
+
+        if (!empty($data['url'])) {
+            $links[] = '<a href="'.$data['url'].'" target="_blank" style="text-decoration: underline;">Url</a>';
+        }
+        if (!empty($data['pubblicazione'])) {
+            $desc = $data['pubblicazione'].(isset($data['editore']) ? ' '.$data['editore'] : '');
+        } elseif (!empty($data['autore']) && !empty($data['titolo'])) {
+            $desc = $data['autore'].' '.$data['titolo'];
+        } elseif (!empty($data['titolo'])) {
+            $desc = $data['titolo'];  
+        }
+        if (!empty($desc)) {
+            $links[] = '<a href="https://www.amazon.it/s?i=stripbooks&k='.urlencode($desc).'" target="_blank" style="text-decoration: underline;">Cerca su Amazon</a>';
+            $links[] = '<a href="https://www.ibs.it/algolia-search?ts=as&qs=true&query='.urlencode($desc).'" target="_blank" style="text-decoration: underline;">Cerca su IBS</a>';
+        }
+
+        $links[] = '<a href="https://www.google.com/search?q='.urlencode($this->descrizione).'" target="_blank" style="text-decoration: underline;">Google</a>';
+        return implode(' | ', $links);
+    }
 }

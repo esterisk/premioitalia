@@ -41,10 +41,7 @@ class CandidatosTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('descrizione')
-                    ->description(fn ($record) => new HtmlString('<a href="https://www.google.com/search?q='.urlencode($record->descrizione).'" target="_blank" style="text-decoration: underline;">Cerca su Google</a> - '.
-                        ' <a href="https://www.amazon.it/s?i=stripbooks&k='.urlencode($record->descrizione).'" target="_blank" style="text-decoration: underline;">Cerca su Amazon</a> - '.
-                        ' <a href="https://www.ibs.it/algolia-search?ts=as&qs=true&query='.urlencode($record->descrizione).'" target="_blank" style="text-decoration: underline;">Cerca su IBS</a>')
-                    )
+                    ->description(fn ($record) => new HtmlString($record->verificationLinks()))
                     //->wrap()
                     ->width('30%')
                     ->sortable()

@@ -15,10 +15,9 @@ class CandidatoForm
     {
         return $schema
             ->components([
-                TextInput::make('categoria_id')
+                Select::make('categoria_id')
                     ->disabled()
-                    ->numeric()
-                    ->default(0),
+                    ->relationship('categoria', 'nome'),
                 TextInput::make('anno')
                     ->disabled()
                     ->numeric(),
