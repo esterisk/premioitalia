@@ -22,6 +22,7 @@ class Invitation extends Model
     {
         $text = str_replace(["\r\n", "\r", "\n", "<br />", "<br/>", "<br>"], "|", $text);
         $text = preg_replace('|\s+|', ' ', $text);
+        $text = preg_replace('| |', ' ', $text);
         $text = preg_replace('|[<>;:,#\"«»“”\(\)\[\]\{\}%]|', '', $text);
         $lines = explode("|", $text);
         $results = [];
