@@ -117,7 +117,7 @@ class Candidato extends Model
             ->where('id', '!=', $this->id)
             ->where('stato', StatoCandidatoEnum::Valido->value)
             ->orderByRaw('MATCH(descrizione) AGAINST(? IN NATURAL LANGUAGE MODE) DESC', [$this->descrizione])
-            ->selectRaw('id, descrizione, MATCH(descrizione) AGAINST(? IN NATURAL LANGUAGE MODE) AS similarity', [$this->descrizione])
+            ->selectRaw('id, descrizione, MATCH(descrizione) AGAINST(? IN NATURAL LANGUAGE MODE) AS similarity, voti_fase1', [$this->descrizione])
             ->limit($quanti);
     }
 
@@ -143,7 +143,7 @@ class Candidato extends Model
                     $color = 'orange';
                 }
 
-                $simili[] = '<span style="color:'.$color.';">'.$simile->descrizione.' ('.round($simile->similarity, 1).' ['.$simile->segnalazioni.'])</span>';
+                $simili[] = '<span style="color:'.$color.';">'.$simile->descrizione.' ('.round($simile->similarity, 1).') ['.$simile->voti_fase1.' voti]</span>';
             }
         }
 
@@ -189,7 +189,7 @@ class Candidato extends Model
             ->toBase();
 
         self::whereIn('categoria_id', $categorie)
-            ->update(['segnalazioni' => $subquery]);
+            ->update(['voti_fase1' => $subquery]);
     }
 
 	public function needLowering()

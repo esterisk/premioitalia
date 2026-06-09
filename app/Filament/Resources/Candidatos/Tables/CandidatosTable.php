@@ -58,7 +58,7 @@ class CandidatosTable
                         'valido' => 'success',
                         'escluso' => 'danger',
                     }),
-                TextColumn::make('segnalazioni')
+                TextColumn::make('voti_fase1')
                     ->label('Voti')
                     ->sortable()
                     ->numeric(),
