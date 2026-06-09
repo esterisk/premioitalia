@@ -143,7 +143,7 @@ class Candidato extends Model
                     $color = 'orange';
                 }
 
-                $simili[] = '<span style="color:'.$color.';">'.$simile->descrizione.' ('.round($simile->similarity, 1).')</span>';
+                $simili[] = '<span style="color:'.$color.';">'.$simile->descrizione.' ('.round($simile->similarity, 1).' ['.$simile->segnalazioni.'])</span>';
             }
         }
 

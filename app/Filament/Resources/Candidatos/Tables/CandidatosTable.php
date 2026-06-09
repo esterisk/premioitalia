@@ -85,6 +85,7 @@ class CandidatosTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->defaultSort('id', 'desc')
             ->filters([
                 SelectFilter::make('anno')
                     ->options(Annata::pluck('anno', 'anno'))
@@ -98,6 +99,12 @@ class CandidatosTable
                         'spostato' => 'Spostato',
                         'escluso' => 'Escluso',
                     ])->default('valido'),
+                SelectFilter::make('verificato')
+                    ->label('Verificato')
+                    ->options([
+                        '0' => 'Non verificato',
+                        '1' => 'Verificato',
+                    ]),
             ], layout: FiltersLayout::AboveContent)
             ->recordActions([
                 Action::make('minuscole')
@@ -108,6 +115,19 @@ class CandidatosTable
                     })
                     ->color(fn ($record) => ! $record->needLowering() ? 'gray' : 'primary')
                     ->disabled(fn ($record) => ! $record->needLowering()),
+                Action::make('cambia_categoria')
+                    ->label('')
+                    ->icon('heroicon-s-folder-arrow-down')
+                    ->schema([
+                        Select::make('categoria_id')
+                            ->label('Categoria')
+                            ->options(fn (Candidato $record) => Categoria::active()->where('id', '!=', $record->categoria_id)->pluck('nome', 'id'))
+                            ->required(),
+                    ])
+                    ->action(function (array $data, Candidato $record): void {
+                        $record->cambiaCategoria($data['categoria_id']);
+                    })
+                    ->disabled(fn ($record) => $record->stato == 'escluso'),
                 Action::make('escludi')
                     ->label('')
                     ->icon('heroicon-s-hand-thumb-down')
