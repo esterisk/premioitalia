@@ -48,7 +48,6 @@
 			<li>Al termine della seconda fase <span data-countdown="{{ $annata->fase_2_a }}T23:59:59">mancano…</span></li>
 		</ul>
 		@endif
-		{{  date('H:i'); }}
 	</div>
 </div>
 
@@ -92,7 +91,7 @@
 			<div class="card-body">
 				<h5 class="card-title">Richiedi l'iscrizione al voto</h5>
 				<p class="card-text">Non sei un elettore registrato? Se hai partecipato a un'Italcon o a una delle convention affiliate (Stranimondi, Deepcon o Aetnacon) puoi richiedere l'iscrizione.</p>
-				<p class="card-text">Invia una mail a <a href="mailto:staff@premioitalia.org">staff@premioitalia.org</a> indicando nome, cognome e convention alla quale hai partecipato, allegando la foto del badge o altre prove della tua partecipazione.</p>
+				<p class="card-text">Invia una mail a <a href="mailto:staff@premioitalia.org">staff@premioitalia.org</a> indicando nome, cognome e convention alla quale hai partecipato, allegando la foto del badge (con il tuo nome), ricevute di iscrizione nominative o altre prove della tua partecipazione.</p>
 			</div>
 		</div>
 	</div>
