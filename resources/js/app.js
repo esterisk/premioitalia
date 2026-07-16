@@ -100,6 +100,12 @@ function valPosition(el, val) {
 // Funzioni globali
 // ============================================================
 
+// Esposte su window perché richiamate da handler inline nell'HTML
+// (onkeyup/onclick), che il bundler non rileva come usi: senza questo
+// il tree-shaking le rimuoverebbe dal build di produzione.
+window.alboSearch = alboSearch;
+window.scroll_to = scroll_to;
+
 function alboSearch(text) {
     if (!text) {
         document.querySelectorAll('.albo-anno').forEach(el => slideDown(el));
