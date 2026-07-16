@@ -78,4 +78,28 @@ class MailingStatusWidget extends Widget implements HasActions, HasSchemas
                 Notification::make()->title('Mailing fermato')->success()->send();
             });
     }
+
+    public function sendReminderAction(): Action
+    {
+        return Action::make('sendReminder')
+            ->label('Invia promemoria')
+            ->icon('heroicon-o-bell-alert')
+            ->color('warning')
+            ->requiresConfirmation()
+            ->modalHeading('Invia promemoria')
+            ->modalDescription('Confermi di voler inviare il sollecito agli elettori che non hanno ancora inviato il voto?')
+            ->action(function (): void {
+                $annata = Annata::corrente();
+
+                if (! $annata) {
+                    Notification::make()->title('Nessuna annata corrente')->danger()->send();
+
+                    return;
+                }
+
+                $annata->mailingSollecito();
+
+                Notification::make()->title('Promemoria inviati')->success()->send();
+            });
+    }
 }

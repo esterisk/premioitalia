@@ -172,4 +172,28 @@ class Annata extends Model
 
         return $this->anno.'-'.$fase.'-'.$wave;
     }
+
+    public function mailingSollecito()
+    {
+        $inviate = 0;
+        $time = time();
+
+        $voti_non_inviati = Voto::whereAnno($this->anno)->whereFase($this->fase())->whereStato('preparazione')->pluck('user_id');
+        $elettori = User::isValid()->whereIn('id', $voti_non_inviati)->get();
+
+        if (! empty(request()->email)) {
+            if ($user = User::findByEmail(request()->email)) {
+                $user->sendSollecitoInvio(true);
+            }
+        } else {
+            foreach ($elettori as $user) {
+                $inviate += $user->sendSollecitoInvio(true);
+            }
+        }
+
+        $time = time() - $time + 1;
+        $result = ['status' => 'success', 'inviate' => $inviate, 'tempo' => $time, 'invii_per_minuto' => $inviate ? round($inviate / $time * 60, 2) : 0];
+
+        return response()->json($result);
+    }
 }
