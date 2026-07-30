@@ -128,7 +128,7 @@
 
 @endif
 
-@if ($annata->fase() == 'fase')
+@if ($annata->fase() == 'fase1')
 
 <div class="row">
 
