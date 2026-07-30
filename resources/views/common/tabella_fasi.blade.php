@@ -36,6 +36,6 @@
     </tr>
     <tr>
         <th><strong>Annuncio risultati e premiazioni</strong></th>
-        <td>La notte di {{ _date($annata->premiazione, 'j F Y') }}</td>
+        <td>La sera del {{ _date($annata->premiazione, 'j F Y') }}</td>
     </tr>
 </table>

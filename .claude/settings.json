@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "mcp__laravel-boost__browser-logs",
-      "mcp__laravel-boost__last-error"
+      "mcp__laravel-boost__last-error",
+      "Bash(grep -n 'function candidati\\\\|function segnalazioni\\\\|protected $table' app/Models/Categoria.php app/Models/Candidato.php)"
     ]
   }
 }

@@ -76,12 +76,13 @@ class Annata extends Model
 
     public function finalisti()
     {
-        return $this->finalisti_pubblici > 0;
+        return (in_array($this->fase(), ['spoglio1', 'fase2'])) && (($this->finalisti_pubblici > 0)
+            || (request()->user()->admin ?? 0) == 1);
     }
 
     public function risultati()
     {
-        return $this->risultati_pubblici > 0 || (request()->user()->admin ?? 0) == 1;
+        return  in_array($this->fase(), ['spoglio2', 'post']) && (($this->risultati_pubblici > 0 )|| (request()->user()->admin ?? 0) == 1);
     }
 
     public function pubblica()

@@ -12,8 +12,8 @@
 	</div>
 	@else
 	
-	<p>Votazione aperta dal {{ _date($annata->fase_2_da, 'd M') }} al {{ _date($annata->fase_2_a, 'd M Y') }}.</p>
-	<p>Premiazione la notte del {{ _date($annata->premiazione, 'd M Y') }} durante {{ $annata->convention->titolo_edizione }} a {{ $annata->convention->city }}.</p>
+	<p>Votazione aperta dal {{ _date($annata->fase_2_da, 'j F') }} al {{ _date($annata->fase_2_a, 'j F Y') }}.</p>
+	<p>Premiazione la sera del {{ _date($annata->premiazione, 'j F Y') }} durante {{ $annata->convention->titolo_edizione }} a {{ $annata->convention->city }}.</p>
 	<div class="finalisti">
 	@foreach ($categorie as $categoria)
 		<div class="row">

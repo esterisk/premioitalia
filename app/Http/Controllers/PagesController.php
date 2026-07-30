@@ -81,9 +81,7 @@ class PagesController extends Controller
 
     public function finalisti()
     {
-        ray('hello');
         $annata = Annata::corrente();
-        ray($annata->risultati() );
         return view('finalisti', ['page_title' => ($annata->risultati() ? 'Risultati' : 'Finalisti') . ' ' . $annata->anno, 'annata' => $annata, 'categorie' => Categoria::attive()]);
     }
 
