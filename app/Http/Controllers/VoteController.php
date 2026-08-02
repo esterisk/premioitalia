@@ -200,6 +200,7 @@ class VoteController extends Controller
 
         $calcolo = new Australian;
         $response = $calcolo->calcolaVincitori();
+        ray($response);
 
         return view('finale', [
             'page_title' => 'Calcolo finale vincitori',
