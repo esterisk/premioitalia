@@ -8,7 +8,10 @@
       "Bash(php -l app/Calcolo/Australian.php)",
       "Bash(php -l app/Calcolo/ElaborazioneAustralian.php)",
       "Bash(php -l app/Filament/Pages/RisultatiVotazione.php)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(php -r 'echo json_decode\\(file_get_contents\\(\"composer.lock\"\\),true\\) ? \"\" : \"\";')",
+      "mcp__laravel-boost__database-query",
+      "Bash(php -r ' *)"
     ]
   }
 }

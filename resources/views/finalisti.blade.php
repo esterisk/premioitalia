@@ -59,9 +59,9 @@
 	</div>
 	
 
-	@if (file_exists(public_path('docs/PremioItaliaAnalisi-'.$annata->anno.'.xlsx')))
+	@if (file_exists(public_path('docs/PremioItaliaAnalisiPrimaFase-'.$annata->anno.'.xlsx')))
 	<div class="row row-download">
-		<p><a href="docs/PremioItaliaAnalisi-{{ $annata->anno }}.xlsx"><img src="/images/xlsx.png"> Scarica l'analisi del voto (prima fase) con l'elenco dei candidati non finalisti e non validi</a></p>
+		<p><a href="docs/PremioItaliaAnalisiPrimaFase-{{ $annata->anno }}.xlsx"><img src="/images/xlsx.png"> Scarica l'analisi del voto (prima fase) con l'elenco dei candidati non finalisti e non validi</a></p>
 	</div>
 	@endif
 
