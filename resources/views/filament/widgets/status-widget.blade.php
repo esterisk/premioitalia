@@ -1,5 +1,5 @@
 <x-filament-widgets::widget>
-    <x-filament::section heading="Stato corrente">
+    <x-filament::section heading="{{ ($status['year']-1974).'° ' ?? '' }}Premio Italia - Annata {{ $status['year'] ?? '' }}">
         @if(empty($status))
             <p class="text-sm text-gray-500">Nessuna annata corrente.</p>
         @else
@@ -31,7 +31,7 @@
             </div>
 
             @if($status['phase'] !== 'pre')
-                <div class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+                <div class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
 
                     <div class="rounded-lg border border-gray-200 dark:border-white/10 px-4 py-3">
                         <p class="text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">Voti fase 1</p>

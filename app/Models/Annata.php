@@ -120,8 +120,8 @@ class Annata extends Model
             'invitations' => $invitations + $reminders + $solicitations,
             'reminders' => $reminders,
             'solicitations' => $solicitations,
-            'faseRimasti' => max(0, round((strtotime($this->fase_1_a.' 23:59:59') - time()) / 86400)),
-            'faseGiorniTotali' => max(1, round((strtotime($this->fase_1_a) - strtotime($this->fase_1_da)) / 86400)),
+            'faseRimasti' => max(0, round((strtotime(($this->fase() == 'fase1' ? $this->fase_1_a : $this->fase_2_a).' 23:59:59') - time()) / 86400)),
+            'faseGiorniTotali' => max(1, round((strtotime(($this->fase() == 'fase1' ? $this->fase_1_a : $this->fase_2_a)) - strtotime(($this->fase() == 'fase1' ? $this->fase_1_da : $this->fase_2_da))) / 86400)),
         ];
 
         return $status;

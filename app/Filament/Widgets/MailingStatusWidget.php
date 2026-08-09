@@ -20,6 +20,7 @@ class MailingStatusWidget extends Widget implements HasActions, HasSchemas
     protected string $view = 'filament.widgets.mailing-status-widget';
 
     protected static ?string $pollingInterval = '5s';
+    protected static ?int $sort = 3;
 
     protected function getViewData(): array
     {

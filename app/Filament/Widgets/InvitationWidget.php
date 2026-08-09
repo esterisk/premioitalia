@@ -22,6 +22,7 @@ class InvitationWidget extends Widget implements HasActions, HasSchemas
     // protected int|string|array $columnSpan = 'full';
 
     public string $testo = '';
+    protected static ?int $sort = 2;
 
     public ?int $conventionId = null;
 

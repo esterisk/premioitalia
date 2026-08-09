@@ -13,7 +13,7 @@
 
             <textarea
                 wire:model="testo"
-                rows="6"
+                rows="3"
                 style="padding: 1em;margin-bottom: 1em;"
                 placeholder="Inserisci i dati degli invitati..."
                 class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500 dark:border-white/10 dark:bg-white/5 dark:text-white dark:placeholder-gray-400"
