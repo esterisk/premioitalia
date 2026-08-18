@@ -31,10 +31,9 @@ class UserForm
                 TextInput::make('username'),
                 TextInput::make('token'),
                 DatePicker::make('token_expire'),
-                TextInput::make('user_status')
+                Toggle::make('user_status')
                     ->required()
-                    ->numeric()
-                    ->default(1),
+                    ->default(true),
                 TextInput::make('status_detail'),
                 Textarea::make('motivi')
                     ->columnSpanFull(),
@@ -48,8 +47,7 @@ class UserForm
                 TextInput::make('email_errors')
                     ->numeric()
                     ->default(0),
-                TextInput::make('last_email_error')
-                    ->email(),
+                TextInput::make('last_email_error'),
                 TextInput::make('invitation_open'),
             ]);
     }
