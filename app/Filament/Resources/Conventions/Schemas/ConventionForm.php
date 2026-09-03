@@ -3,10 +3,10 @@
 namespace App\Filament\Resources\Conventions\Schemas;
 
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
-use Filament\Schemas\Schema;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Schema;
 
 class ConventionForm
 {
@@ -22,12 +22,19 @@ class ConventionForm
                     ->numeric(),
                 TextInput::make('titolo_edizione')
                     ->required(),
-                    /*
+                /*
                 TextInput::make('codice')
                     ->required(),
                 */
                 TextInput::make('city')
                     ->required(),
+                TextInput::make('location.lat')
+                    ->label('Latitudine')
+                    ->numeric()
+                    ->helperText('Coordinate della sede, usate per verificare le richieste di iscrizione presentate in convention.'),
+                TextInput::make('location.lng')
+                    ->label('Longitudine')
+                    ->numeric(),
                 DatePicker::make('date_start')
                     ->required(),
                 DatePicker::make('date_end')

@@ -1,16 +1,16 @@
 <?php
 
 use App\Http\Controllers\ApiController;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\CandidaturaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvitationController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\VoteController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +23,9 @@ use Illuminate\Support\Facades\View;
 |
 */
 
-//Auth::routes();
+// Auth::routes();
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 setlocale(LC_ALL, 'it_IT');
 
@@ -40,7 +40,7 @@ Route::get('/api/invito-iscrizione', [InvitationController::class, 'send'])->nam
 Route::get('/iscrizione', [RegisterController::class, 'confirm'])->name('iscrizione');
 Route::post('/iscrizione/conferma', [RegisterController::class, 'store'])->name('iscrizione.conferma');
 
-//Route::get('/api/redo1', 'VoteController@redo1')->name('login-by-email');
+// Route::get('/api/redo1', 'VoteController@redo1')->name('login-by-email');
 
 /*
 Route::get('/elettore/ammissione', [ ElettoreController::class, 'admission' ])->name('admission');
@@ -111,3 +111,6 @@ Route::post('/candidature/{categoria}', [CandidaturaController::class, 'inserisc
 Route::get('/donazione/grazie', [PagesController::class, 'grazie'])->name('grazie');
 Route::get('/donazione', [PagesController::class, 'donazione'])->name('donazione');
 Route::get('/pixel/{u}/{m}', [NotificationController::class, 'pixel'])->name('pixel');
+
+Route::get('/applicazione', [ApplicationController::class, 'show'])->name('applicazione');
+Route::post('/applicazione', [ApplicationController::class, 'store'])->name('applicazione-post');

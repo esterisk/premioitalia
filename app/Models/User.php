@@ -31,7 +31,7 @@ class User extends Authenticatable implements FilamentUser // implements MustVer
      *
      * @var list<string>
      */
-	protected $guarded = ['id'];
+    protected $guarded = ['id'];
 
     public function canAccessPanel(Panel $panel): bool
     {
@@ -77,6 +77,28 @@ class User extends Authenticatable implements FilamentUser // implements MustVer
         return User::whereEmail($email)->first();
     }
 
+    /**
+     * Cerca un utente con lo stesso nome e cognome, ignorando maiuscole e spazi.
+     */
+    public static function findByName(string $firstname, string $lastname): ?self
+    {
+        return User::query()
+            ->whereRaw('LOWER(TRIM(firstname)) = ?', [self::normalizeName($firstname)])
+            ->whereRaw('LOWER(TRIM(lastname)) = ?', [self::normalizeName($lastname)])
+            ->first();
+    }
+
+    public function hasName(string $firstname, string $lastname): bool
+    {
+        return self::normalizeName($this->firstname) === self::normalizeName($firstname)
+            && self::normalizeName($this->lastname) === self::normalizeName($lastname);
+    }
+
+    public static function normalizeName(?string $name): string
+    {
+        return mb_strtolower(trim((string) $name));
+    }
+
     public function valid()
     {
         return $this->user_status == 1;
@@ -120,6 +142,7 @@ class User extends Authenticatable implements FilamentUser // implements MustVer
         if ($limit) {
             $query->limit($limit);
         }
+
         return $query->get();
     }
 
@@ -301,12 +324,13 @@ class User extends Authenticatable implements FilamentUser // implements MustVer
     {
         $annata = Annata::corrente();
         $tag = $annata->mailingTag();
-        $elettori = User::destinatariMailing($tag,10);
+        $elettori = User::destinatariMailing($tag, 10);
 
-        ray($tag, count($elettori) . ' destinatari'); 
+        ray($tag, count($elettori).' destinatari');
 
         if (count($elettori) == 0) {
             $annata->mailingStop();
+
             return ['status' => 'success', 'message' => 'Nessun destinatario per il mailing'];
         }
 
@@ -331,7 +355,7 @@ class User extends Authenticatable implements FilamentUser // implements MustVer
                 $this_block++;
             }
         }
-        //sleep(config('premioitalia.mailing.sleep'));
+        // sleep(config('premioitalia.mailing.sleep'));
         /*			if ($this_block >= config('premioitalia.mailing.chunks')) {
                         $this_block = 0;
                         sleep(config('premioitalia.mailing.sleep2'));
@@ -343,6 +367,7 @@ class User extends Authenticatable implements FilamentUser // implements MustVer
         }
         $time = time() - $time;
         $result = ['status' => 'working', 'inviate' => $inviate, 'tempo' => $time, 'invii_per_minuto' => $inviate ? round($inviate / $time * 60, 2) : 0];
+
         return $result;
     }
 
