@@ -13,15 +13,7 @@
 
 	<!-- Styles -->
     @vite($vite ?? [ 'resources/css/app.css', 'resources/js/app.js'])
-	<!-- MATOMO -->
-	<script>
-		var _paq = window._paq = window._paq || [];
-_paq.push(['trackPageView']); _paq.push(['enableLinkTracking']);
-(function() { var u="//analytics.delosnetwork.it/"; _paq.push(['setTrackerUrl', u+'matomo.php']);
-_paq.push(['setSiteId', '16']);
-var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s); })();
-	</script>
-	<!-- /MATOMO -->
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="a772e0bd-5b2e-42ce-88e7-d5741caf3f99"></script>
 
 </head>
 

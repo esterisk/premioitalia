@@ -50,6 +50,21 @@ it('non conferma la posizione se la convention non ha una location', function ()
         ->and(convention(['lat' => CASTELLO_LAT])->coordinateVicine(CASTELLO_LAT, CASTELLO_LNG))->toBeFalse();
 });
 
+it('non considera valide coordinate vuote o fuori scala', function () {
+    expect(convention(['lat' => '', 'lng' => ''])->hasLocation())->toBeFalse()
+        ->and(convention(['lat' => null, 'lng' => null])->hasLocation())->toBeFalse()
+        ->and(convention(['lat' => 'Milano', 'lng' => 'Italia'])->hasLocation())->toBeFalse()
+        ->and(convention(['lat' => 145.1, 'lng' => 9.1])->hasLocation())->toBeFalse()
+        ->and(convention(['lat' => 45.1, 'lng' => 400])->hasLocation())->toBeFalse();
+});
+
+it('accetta le coordinate anche scritte come stringhe', function () {
+    $stringhe = convention(['lat' => '45.470249', 'lng' => '9.179617']);
+
+    expect($stringhe->hasLocation())->toBeTrue()
+        ->and($stringhe->coordinateVicine(CASTELLO_LAT, CASTELLO_LNG))->toBeTrue();
+});
+
 it('espone la distanza dalla location solo quando è calcolabile', function () {
     expect(convention()->distanzaDa(DUOMO_LAT, DUOMO_LNG))->toBeGreaterThan(1000)
         ->and(convention()->distanzaDa(null, null))->toBeNull()

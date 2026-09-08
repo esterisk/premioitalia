@@ -56,16 +56,25 @@ class Convention extends Model
 
     public function latitudine(): ?float
     {
-        $location = $this->location;
-
-        return isset($location['lat']) ? (float) $location['lat'] : null;
+        return self::gradi($this->location['lat'] ?? null, 90);
     }
 
     public function longitudine(): ?float
     {
-        $location = $this->location;
+        return self::gradi($this->location['lng'] ?? null, 180);
+    }
 
-        return isset($location['lng']) ? (float) $location['lng'] : null;
+    /**
+     * Una coordinata vale solo se è un numero entro l'intervallo ammesso: un campo
+     * lasciato vuoto non deve diventare lo zero del golfo di Guinea.
+     */
+    private static function gradi(mixed $valore, float $massimo): ?float
+    {
+        if (! is_numeric($valore) || abs((float) $valore) > $massimo) {
+            return null;
+        }
+
+        return (float) $valore;
     }
 
     public function hasLocation(): bool
