@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Candidatos\Schemas;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\FileUpload;
 use Filament\Schemas\Schema;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\Toggle;
@@ -35,6 +36,10 @@ class CandidatoForm
                     ->default(false),
                 TextInput::make('identificativo')
                     ->disabled(),
+                FileUpload::make('immagine')
+                    ->disk('candidati')
+                    ->image(),
+
                 /*
                 TextInput::make('ordine')
                     ->required()

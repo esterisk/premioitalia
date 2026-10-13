@@ -39,12 +39,12 @@
 			<input type="hidden" name="longitude" id="longitude" value="{{ old('longitude') }}">
 
 			<div class="form-group row">
-				<div class="col-sm-10 offset-sm-2">
+				<div class="col-sm-12">
 					<div class="alert alert-info" id="geo-stato">Verifica della posizione in corso&hellip;</div>
 				</div>
 			</div>
 
-			<div class="form-group row">
+			<div class="form-group row mt-3">
 				<label class="col-sm-2 col-form-label text-right" for="nome">Nome</label>
 				<div class="col-sm-6">
 					<input type="text" class="form-control{{ $errors->has('nome') ? ' is-invalid' : '' }}" id="nome" name="nome" placeholder="Nome" value="{{ old('nome') }}" required>
@@ -54,7 +54,7 @@
 				</div>
 			</div>
 
-			<div class="form-group row">
+			<div class="form-group row mt-3">
 				<label class="col-sm-2 col-form-label text-right" for="cognome">Cognome</label>
 				<div class="col-sm-6">
 					<input type="text" class="form-control{{ $errors->has('cognome') ? ' is-invalid' : '' }}" id="cognome" name="cognome" placeholder="Cognome" value="{{ old('cognome') }}" required>
@@ -64,7 +64,7 @@
 				</div>
 			</div>
 
-			<div class="form-group row">
+			<div class="form-group row mt-3">
 				<label class="col-sm-2 col-form-label text-right" for="email">Email</label>
 				<div class="col-sm-6">
 					<input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" id="email" name="email" placeholder="Email" value="{{ old('email') }}" required>
@@ -74,7 +74,7 @@
 				</div>
 			</div>
 
-			<div class="form-group row{{ $selfieSempreRichiesto || $errors->has('selfie') ? '' : ' d-none' }}" id="blocco-selfie">
+			<div class="form-group row{{ $selfieSempreRichiesto || $errors->has('selfie') ? '' : ' d-none' }} mt-3" id="blocco-selfie">
 				<label class="col-sm-2 col-form-label text-right" for="selfie">Foto</label>
 				<div class="col-sm-6">
 					<input type="file" class="form-control-file{{ $errors->has('selfie') ? ' is-invalid' : '' }}" id="selfie" name="selfie" accept="image/*" capture="user">
@@ -85,7 +85,7 @@
 				</div>
 			</div>
 
-			<div class="form-group row">
+			<div class="form-group row mt-3">
 				<div class="col-sm-10 offset-sm-2">
 					<button type="submit" class="btn btn-primary">Invia la richiesta</button>
 				</div>

@@ -3,29 +3,34 @@
 namespace App\Filament\Resources\Candidatos\Tables;
 
 use App\Models\Annata;
+use App\Models\Candidato;
 use App\Models\Categoria;
+use App\Models\Motivazione;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Enums\RecordActionsPosition;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\HtmlString;
-use Filament\Actions\Action;
-use Filament\Forms\Components\Select;
-use App\Models\Candidato;
-use Filament\Tables\Enums\RecordActionsPosition;
-use App\Models\Motivazione;
 
 class CandidatosTable
 {
-
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
+                ImageColumn::make('immagine')
+                    ->label('Immagine')
+                    ->disk('candidati')
+                    ->visibility('public')
+                    ->imageWidth(50),
                 TextColumn::make('categoria.nome_breve')
                     ->numeric()
                     ->sortable(),
@@ -42,7 +47,7 @@ class CandidatosTable
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('descrizione')
                     ->description(fn ($record) => new HtmlString($record->verificationLinks()))
-                    //->wrap()
+                    // ->wrap()
                     ->width('30%')
                     ->sortable()
                     ->searchable(),
@@ -105,7 +110,19 @@ class CandidatosTable
                         '0' => 'Non verificato',
                         '1' => 'Verificato',
                     ]),
+                SelectFilter::make('finalista')
+                    ->label('Finalisti')
+                    ->options([
+                        '0' => 'Non finalista',
+                        '1' => 'Finalista',
+                    ])
+                    ->query(fn (Builder $query, array $data): Builder => match ($data['value'] ?? null) {
+                        '0' => $query->where('finalista', 0),
+                        '1' => $query->where('finalista', '>', 0),
+                        default => $query,
+                    }),
             ], layout: FiltersLayout::AboveContent)
+            ->persistFiltersInSession()
             ->recordActions([
                 Action::make('minuscole')
                     ->label('Aa')

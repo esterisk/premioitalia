@@ -11,7 +11,9 @@
       "Bash(npm run *)",
       "Bash(php -r 'echo json_decode\\(file_get_contents\\(\"composer.lock\"\\),true\\) ? \"\" : \"\";')",
       "mcp__laravel-boost__database-query",
-      "Bash(php -r ' *)"
+      "Bash(php -r ' *)",
+      "Bash(cd \"/Users/silvio/Sites/ApacheDocuments/Premio Italia/premioitalia12.local\" && grep -n -A8 \"'candidati'\" config/filesystems.php; ls tests/Feature/../ ; grep -rn \"Candidato\" tests | head; ls database/factories)",
+      "Read(//Users/silvio/Sites/ApacheDocuments/Premio Italia/premioitalia12.local/tests/**)"
     ]
   }
 }
