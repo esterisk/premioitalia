@@ -113,4 +113,3 @@ Route::get('/donazione', [PagesController::class, 'donazione'])->name('donazione
 Route::get('/pixel/{u}/{m}', [NotificationController::class, 'pixel'])->name('pixel');
 
 Route::get('/applicazione', [ApplicationController::class, 'show'])->name('applicazione');
-Route::post('/applicazione', [ApplicationController::class, 'store'])->name('applicazione-post');
