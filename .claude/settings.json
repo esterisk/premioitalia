@@ -15,7 +15,9 @@
       "Bash(cd \"/Users/silvio/Sites/ApacheDocuments/Premio Italia/premioitalia12.local\" && grep -n -A8 \"'candidati'\" config/filesystems.php; ls tests/Feature/../ ; grep -rn \"Candidato\" tests | head; ls database/factories)",
       "Read(//Users/silvio/Sites/ApacheDocuments/Premio Italia/premioitalia12.local/tests/**)",
       "Bash(curl -sk -o /dev/null -w \"%{http_code}\\\\n\" https://pi12.local/applicazione)",
-      "Bash(curl -sk https://pi12.local/applicazione)"
+      "Bash(curl -sk https://pi12.local/applicazione)",
+      "Bash(curl -sk -o /dev/null -D - https://pi12.local/applicazione)",
+      "Bash(php -r 'echo php_ini_loaded_file\\(\\),\"\\\\n\",ini_get\\(\"upload_max_filesize\"\\),\" \",ini_get\\(\"post_max_size\"\\),\"\\\\n\";')"
     ]
   }
 }
