@@ -5,9 +5,11 @@ use App\Models\Application;
 use App\Models\Convention;
 use App\Models\User;
 use App\Services\ExifPosition;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Locked;
 use Livewire\Volt\Component;
 use Livewire\WithFileUploads;
+use Symfony\Component\Mailer\Exception\UnexpectedResponseException;
 
 new class extends Component {
     use WithFileUploads;
@@ -22,6 +24,11 @@ new class extends Component {
      * possano confermare la posizione.
      */
     private const ETA_MASSIMA_SELFIE = 60;
+
+    /**
+     * Codici SMTP con cui il server di posta rifiuta l'indirizzo del destinatario.
+     */
+    private const CODICI_DESTINATARIO_RIFIUTATO = [550, 551, 553];
 
     #[Locked]
     public Convention $convention;
@@ -142,7 +149,25 @@ new class extends Component {
         ]);
         $application->save();
 
-        $application->sendConfirmation();
+        try {
+            $application->sendConfirmation();
+        } catch (UnexpectedResponseException $eccezione) {
+            if (! in_array($eccezione->getCode(), self::CODICI_DESTINATARIO_RIFIUTATO, true)) {
+                throw $eccezione;
+            }
+
+            // Senza un indirizzo raggiungibile la richiesta non può essere seguita:
+            // viene annullata perché l'utente possa correggerlo e inviarla di nuovo.
+            $application->delete();
+
+            if ($snapshot) {
+                Storage::disk('local')->delete($snapshot);
+            }
+
+            $this->addError('email', 'Il server di posta ha rifiutato questo indirizzo email: controlla di averlo scritto correttamente e invia di nuovo la richiesta.');
+
+            return;
+        }
 
         $this->reset('nome', 'cognome', 'email', 'selfie');
         $this->inviata = true;
