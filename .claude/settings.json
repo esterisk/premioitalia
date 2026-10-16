@@ -17,7 +17,11 @@
       "Bash(curl -sk -o /dev/null -w \"%{http_code}\\\\n\" https://pi12.local/applicazione)",
       "Bash(curl -sk https://pi12.local/applicazione)",
       "Bash(curl -sk -o /dev/null -D - https://pi12.local/applicazione)",
-      "Bash(php -r 'echo php_ini_loaded_file\\(\\),\"\\\\n\",ini_get\\(\"upload_max_filesize\"\\),\" \",ini_get\\(\"post_max_size\"\\),\"\\\\n\";')"
+      "Bash(php -r 'echo php_ini_loaded_file\\(\\),\"\\\\n\",ini_get\\(\"upload_max_filesize\"\\),\" \",ini_get\\(\"post_max_size\"\\),\"\\\\n\";')",
+      "Bash(php -r 'require \"vendor/autoload.php\"; $r=App\\\\Calcolo\\\\Condorcet::elabora\\([1,2,3],[[1,2],[1,3],[2,1],[3,1,2]]\\); echo json_encode\\([$r[\"vincitoriCondorcet\"],$r[\"ciclo\"],$r[\"matrice\"]]\\),\"\\\\n\"; $r=App\\\\Calcolo\\\\Condorcet::elabora\\([1,2,3],[[1,2,3],[2,3,1],[3,1,2]]\\); echo json_encode\\([$r[\"vincitoriCondorcet\"],$r[\"ciclo\"]]\\);')",
+      "Bash(php -l app/Filament/Pages/RisultatiCondorcet.php)",
+      "Bash(php -r 'require \"vendor/autoload.php\"; $r=App\\\\Calcolo\\\\Medaglie::elabora\\([1,2,3],[[1,3],[2,1],[3,2],[3,2]]\\); echo json_encode\\(array_map\\(fn\\($x\\)=>[$x[\"id\"],$x[\"punti\"],$x[1]],$r[\"classifica\"]\\)\\);')",
+      "Bash(php -r 'require \"vendor/autoload.php\"; $r=App\\\\Calcolo\\\\Medaglie::elabora\\([1,2,3,4],[[1],[3,2],[4,3,2],[4,3,2],[3,4]]\\); echo json_encode\\(array_map\\(fn\\($x\\)=>[$x[\"id\"],$x[\"punti\"]],$r[\"classifica\"]\\)\\);')"
     ]
   }
 }
