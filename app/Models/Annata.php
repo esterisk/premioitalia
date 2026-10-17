@@ -40,7 +40,7 @@ class Annata extends Model
             return 'spoglio1';
         } elseif ($now >= $this->fase_2_da && $now <= $this->fase_2_a.' 23:59:59') {
             return 'fase2';
-        } elseif ($now > $this->fase_2_a.' 23:59:59' && $now < $this->premiazione) {
+        } elseif ($now > $this->fase_2_a.' 23:59:59' && $now <= $this->premiazione) {
             return 'spoglio2';
         } elseif ($now > $this->premiazione) {
             return 'post';
