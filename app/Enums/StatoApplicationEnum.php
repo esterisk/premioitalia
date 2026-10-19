@@ -6,12 +6,14 @@ enum StatoApplicationEnum: string
 {
     case InAttesa = 'PENDING';
     case DaVerificare = 'DA_VERIFICARE';
+    case Ratificata = 'RATIFICATA';
 
     public function label(): string
     {
         return match ($this) {
             self::InAttesa => 'In attesa di valutazione',
             self::DaVerificare => 'Da verificare',
+            self::Ratificata => 'Ratificata',
         };
     }
 }

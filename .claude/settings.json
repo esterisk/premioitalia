@@ -21,7 +21,11 @@
       "Bash(php -r 'require \"vendor/autoload.php\"; $r=App\\\\Calcolo\\\\Condorcet::elabora\\([1,2,3],[[1,2],[1,3],[2,1],[3,1,2]]\\); echo json_encode\\([$r[\"vincitoriCondorcet\"],$r[\"ciclo\"],$r[\"matrice\"]]\\),\"\\\\n\"; $r=App\\\\Calcolo\\\\Condorcet::elabora\\([1,2,3],[[1,2,3],[2,3,1],[3,1,2]]\\); echo json_encode\\([$r[\"vincitoriCondorcet\"],$r[\"ciclo\"]]\\);')",
       "Bash(php -l app/Filament/Pages/RisultatiCondorcet.php)",
       "Bash(php -r 'require \"vendor/autoload.php\"; $r=App\\\\Calcolo\\\\Medaglie::elabora\\([1,2,3],[[1,3],[2,1],[3,2],[3,2]]\\); echo json_encode\\(array_map\\(fn\\($x\\)=>[$x[\"id\"],$x[\"punti\"],$x[1]],$r[\"classifica\"]\\)\\);')",
-      "Bash(php -r 'require \"vendor/autoload.php\"; $r=App\\\\Calcolo\\\\Medaglie::elabora\\([1,2,3,4],[[1],[3,2],[4,3,2],[4,3,2],[3,4]]\\); echo json_encode\\(array_map\\(fn\\($x\\)=>[$x[\"id\"],$x[\"punti\"]],$r[\"classifica\"]\\)\\);')"
+      "Bash(php -r 'require \"vendor/autoload.php\"; $r=App\\\\Calcolo\\\\Medaglie::elabora\\([1,2,3,4],[[1],[3,2],[4,3,2],[4,3,2],[3,4]]\\); echo json_encode\\(array_map\\(fn\\($x\\)=>[$x[\"id\"],$x[\"punti\"]],$r[\"classifica\"]\\)\\);')",
+      "Bash(cd \"/Users/silvio/Sites/ApacheDocuments/Premio Italia/premioitalia12.local\" && ls database/migrations | head -30; ls database/schema 2>&1; grep -n \"DB_\" .env | head; sed -n 15,30p app/Providers/AppServiceProvider.php; sed -i 's/^use Livewire\\\\\\\\Livewire;/use Filament\\\\\\\\Actions\\\\\\\\Testing\\\\\\\\TestAction;\\\\nuse Livewire\\\\\\\\Livewire;/' tests/Feature/RatificaApplicationTest.php; grep -n TestAction tests/Feature/RatificaApplicationTest.php)"
+    ],
+    "additionalDirectories": [
+      "/Users/silvio/Sites/ApacheDocuments/Premio Italia/premioitalia12.local/tests/Feature"
     ]
   }
 }
